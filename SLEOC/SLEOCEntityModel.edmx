@@ -1,0 +1,1570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SQL2012_947078_cdashdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SL_AVATAR">
+          <Key>
+            <PropertyRef Name="AvatarID" />
+          </Key>
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AvatarName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="AvatarRegisterDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_AVATAR_IMAGE">
+          <Key>
+            <PropertyRef Name="AvatarImageID" />
+          </Key>
+          <Property Name="AvatarImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageID" Type="int" Nullable="false" />
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_AVATAR_PROFILE">
+          <Key>
+            <PropertyRef Name="ProfileHash" />
+          </Key>
+          <Property Name="ProfileHash" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_AVATAR_PROFILE_USER_PROFILE">
+          <Key>
+            <PropertyRef Name="AvatarUserID" />
+          </Key>
+          <Property Name="AvatarUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AvatarUsername" Type="nvarchar" MaxLength="56" Nullable="false" />
+          <Property Name="ProfileHash" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_CHAT">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatMessage" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ChatTimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="ChatIsFromSL" Type="bit" Nullable="false" />
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_GAME">
+          <Key>
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="GameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GameIsMultiplayer" Type="bit" Nullable="false" />
+          <Property Name="GameDescription" Type="varchar" MaxLength="100" />
+          <Property Name="GameIsReleased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_GAME_VERSION">
+          <Key>
+            <PropertyRef Name="GameVersionID" />
+          </Key>
+          <Property Name="GameVersionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameVersionName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GameVersionDescription" Type="varchar" MaxLength="100" />
+          <Property Name="GameVersionPlayCount" Type="int" Nullable="false" />
+          <Property Name="GameID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_IMAGE">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageData" Type="image" />
+          <Property Name="ImageURL" Type="varchar(max)" />
+          <Property Name="ImageIsFile" Type="bit" Nullable="false" />
+          <Property Name="ImageTitle" Type="varchar" MaxLength="200" />
+          <Property Name="ImageUploadDate" Type="datetime" Nullable="false" />
+          <Property Name="UploaderID" Type="uniqueidentifier" />
+          <Property Name="ImageMimeType" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="SL_LOCATION">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationX" Type="float" Nullable="false" />
+          <Property Name="LocationY" Type="float" Nullable="false" />
+          <Property Name="LocationZ" Type="float" Nullable="false" />
+          <Property Name="SimID" Type="int" Nullable="false" />
+          <Property Name="OwnerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocationDescription" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="SL_LOCATION_IMAGE">
+          <Key>
+            <PropertyRef Name="LocationImageID" />
+          </Key>
+          <Property Name="LocationImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_LOCATION_SETTINGS">
+          <Key>
+            <PropertyRef Name="LocationSettingsID" />
+          </Key>
+          <Property Name="LocationSettingsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="LocationChatIsOn" Type="bit" />
+        </EntityType>
+        <EntityType Name="SL_MP_GAME_SESSION">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionScore_A" Type="int" Nullable="false" />
+          <Property Name="SessionScore_B" Type="int" Nullable="false" />
+          <Property Name="SessionTime" Type="datetime" Nullable="false" />
+          <Property Name="PlayerID_A" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PlayerID_B" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GameVersionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_ONLINE_AVATAR">
+          <Key>
+            <PropertyRef Name="OnlineAvatarID" />
+          </Key>
+          <Property Name="OnlineAvatarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OnlineAvatarIsActive" Type="bit" Nullable="false" />
+          <Property Name="OnlineAvatarTimeStamp" Type="datetime" />
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_POSITION">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionX" Type="float" Nullable="false" />
+          <Property Name="PositionY" Type="float" Nullable="false" />
+          <Property Name="PositionZ" Type="float" Nullable="false" />
+          <Property Name="PositionTimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SimID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_SIM">
+          <Key>
+            <PropertyRef Name="SimID" />
+          </Key>
+          <Property Name="SimID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SimName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SimDescription" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SL_SP_GAME_SESSION">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionScore" Type="int" Nullable="false" />
+          <Property Name="SessionTime" Type="datetime" Nullable="false" />
+          <Property Name="PlayerID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GameVersionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_TAG">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TagDescription" Type="varchar" MaxLength="100" />
+          <Property Name="TagIconName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_TAG_LOCATION">
+          <Key>
+            <PropertyRef Name="TagID" />
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="TagID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SL_VISITOR">
+          <Key>
+            <PropertyRef Name="VisitorID" />
+          </Key>
+          <Property Name="VisitorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VisitorTimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SLEOC_TEAM">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TeamDescription" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SLEOC_TEAM_MEMBER">
+          <Key>
+            <PropertyRef Name="TeamMemberID" />
+          </Key>
+          <Property Name="TeamMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AvatarID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AVATAR_IMAGE_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_AVATAR_IMAGE" Type="Self.SL_AVATAR_IMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_AVATAR_IMAGE">
+              <PropertyRef Name="AvatarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AVATAR_IMAGE_IMAGE">
+          <End Role="SL_IMAGE" Type="Self.SL_IMAGE" Multiplicity="1" />
+          <End Role="SL_AVATAR_IMAGE" Type="Self.SL_AVATAR_IMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_IMAGE">
+              <PropertyRef Name="ImageID" />
+            </Principal>
+            <Dependent Role="SL_AVATAR_IMAGE">
+              <PropertyRef Name="ImageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AVATAR_PROFILE_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_AVATAR_PROFILE" Type="Self.SL_AVATAR_PROFILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_AVATAR_PROFILE">
+              <PropertyRef Name="AvatarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHAT_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_CHAT" Type="Self.SL_CHAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_CHAT">
+              <PropertyRef Name="AvatarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHAT_LOCATION">
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="1" />
+          <End Role="SL_CHAT" Type="Self.SL_CHAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_LOCATION">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="SL_CHAT">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GAME_VERSION_GAME">
+          <End Role="SL_GAME" Type="Self.SL_GAME" Multiplicity="1" />
+          <End Role="SL_GAME_VERSION" Type="Self.SL_GAME_VERSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_GAME">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="SL_GAME_VERSION">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IMAGE_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="0..1" />
+          <End Role="SL_IMAGE" Type="Self.SL_IMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_IMAGE">
+              <PropertyRef Name="UploaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCATION_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_LOCATION">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCATION_IMAGE_IMAGE">
+          <End Role="SL_IMAGE" Type="Self.SL_IMAGE" Multiplicity="1" />
+          <End Role="SL_LOCATION_IMAGE" Type="Self.SL_LOCATION_IMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_IMAGE">
+              <PropertyRef Name="ImageID" />
+            </Principal>
+            <Dependent Role="SL_LOCATION_IMAGE">
+              <PropertyRef Name="ImageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCATION_IMAGE_LOCATION">
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="1" />
+          <End Role="SL_LOCATION_IMAGE" Type="Self.SL_LOCATION_IMAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_LOCATION">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="SL_LOCATION_IMAGE">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCATION_SETTINGS_LOCATION">
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="1" />
+          <End Role="SL_LOCATION_SETTINGS" Type="Self.SL_LOCATION_SETTINGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_LOCATION">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="SL_LOCATION_SETTINGS">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCATION_SIM">
+          <End Role="SL_SIM" Type="Self.SL_SIM" Multiplicity="1" />
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_SIM">
+              <PropertyRef Name="SimID" />
+            </Principal>
+            <Dependent Role="SL_LOCATION">
+              <PropertyRef Name="SimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MP_GAME_SESSION_GAME_VERSION">
+          <End Role="SL_GAME_VERSION" Type="Self.SL_GAME_VERSION" Multiplicity="1" />
+          <End Role="SL_MP_GAME_SESSION" Type="Self.SL_MP_GAME_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_GAME_VERSION">
+              <PropertyRef Name="GameVersionID" />
+            </Principal>
+            <Dependent Role="SL_MP_GAME_SESSION">
+              <PropertyRef Name="GameVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MP_GAME_SESSION_PLAYER_A">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_MP_GAME_SESSION" Type="Self.SL_MP_GAME_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_MP_GAME_SESSION">
+              <PropertyRef Name="PlayerID_A" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MP_GAME_SESSION_PLAYER_B">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_MP_GAME_SESSION" Type="Self.SL_MP_GAME_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_MP_GAME_SESSION">
+              <PropertyRef Name="PlayerID_B" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ONLINE_AVATAR_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_ONLINE_AVATAR" Type="Self.SL_ONLINE_AVATAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_ONLINE_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ONLINE_AVATAR_LOCATION">
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="1" />
+          <End Role="SL_ONLINE_AVATAR" Type="Self.SL_ONLINE_AVATAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_LOCATION">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="SL_ONLINE_AVATAR">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POSITION_AvatarID">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_POSITION" Type="Self.SL_POSITION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_POSITION">
+              <PropertyRef Name="AvatarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POSITION_SimID">
+          <End Role="SL_SIM" Type="Self.SL_SIM" Multiplicity="1" />
+          <End Role="SL_POSITION" Type="Self.SL_POSITION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_SIM">
+              <PropertyRef Name="SimID" />
+            </Principal>
+            <Dependent Role="SL_POSITION">
+              <PropertyRef Name="SimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE">
+          <End Role="SL_AVATAR_PROFILE" Type="Self.SL_AVATAR_PROFILE" Multiplicity="1" />
+          <End Role="SL_AVATAR_PROFILE_USER_PROFILE" Type="Self.SL_AVATAR_PROFILE_USER_PROFILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR_PROFILE">
+              <PropertyRef Name="ProfileHash" />
+            </Principal>
+            <Dependent Role="SL_AVATAR_PROFILE_USER_PROFILE">
+              <PropertyRef Name="ProfileHash" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SL_GAME_SESSION_GAME_VERSION">
+          <End Role="SL_GAME_VERSION" Type="Self.SL_GAME_VERSION" Multiplicity="1" />
+          <End Role="SL_SP_GAME_SESSION" Type="Self.SL_SP_GAME_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_GAME_VERSION">
+              <PropertyRef Name="GameVersionID" />
+            </Principal>
+            <Dependent Role="SL_SP_GAME_SESSION">
+              <PropertyRef Name="GameVersionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SL_GAME_SESSION_PLAYER">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_SP_GAME_SESSION" Type="Self.SL_SP_GAME_SESSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_SP_GAME_SESSION">
+              <PropertyRef Name="PlayerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SLEOC_TEAM_MEMBER_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SLEOC_TEAM_MEMBER" Type="Self.SLEOC_TEAM_MEMBER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SLEOC_TEAM_MEMBER">
+              <PropertyRef Name="AvatarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SLEOC_TEAM_MEMBER_TEAM">
+          <End Role="SLEOC_TEAM" Type="Self.SLEOC_TEAM" Multiplicity="1" />
+          <End Role="SLEOC_TEAM_MEMBER" Type="Self.SLEOC_TEAM_MEMBER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLEOC_TEAM">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="SLEOC_TEAM_MEMBER">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAG_LOCATION_LOCATION">
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="1" />
+          <End Role="SL_TAG_LOCATION" Type="Self.SL_TAG_LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_LOCATION">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="SL_TAG_LOCATION">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAG_LOCATION_TAG">
+          <End Role="SL_TAG" Type="Self.SL_TAG" Multiplicity="1" />
+          <End Role="SL_TAG_LOCATION" Type="Self.SL_TAG_LOCATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_TAG">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="SL_TAG_LOCATION">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VISITOR_AVATAR">
+          <End Role="SL_AVATAR" Type="Self.SL_AVATAR" Multiplicity="1" />
+          <End Role="SL_VISITOR" Type="Self.SL_VISITOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_AVATAR">
+              <PropertyRef Name="AvatarID" />
+            </Principal>
+            <Dependent Role="SL_VISITOR">
+              <PropertyRef Name="AvatarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VISITOR_LOCATION">
+          <End Role="SL_LOCATION" Type="Self.SL_LOCATION" Multiplicity="1" />
+          <End Role="SL_VISITOR" Type="Self.SL_VISITOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SL_LOCATION">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="SL_VISITOR">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SQL2012_947078_cdashdbModelStoreContainer">
+          <EntitySet Name="SL_AVATAR" EntityType="Self.SL_AVATAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_AVATAR_IMAGE" EntityType="Self.SL_AVATAR_IMAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_AVATAR_PROFILE" EntityType="Self.SL_AVATAR_PROFILE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_AVATAR_PROFILE_USER_PROFILE" EntityType="Self.SL_AVATAR_PROFILE_USER_PROFILE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_CHAT" EntityType="Self.SL_CHAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_GAME" EntityType="Self.SL_GAME" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_GAME_VERSION" EntityType="Self.SL_GAME_VERSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_IMAGE" EntityType="Self.SL_IMAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_LOCATION" EntityType="Self.SL_LOCATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_LOCATION_IMAGE" EntityType="Self.SL_LOCATION_IMAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_LOCATION_SETTINGS" EntityType="Self.SL_LOCATION_SETTINGS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_MP_GAME_SESSION" EntityType="Self.SL_MP_GAME_SESSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_ONLINE_AVATAR" EntityType="Self.SL_ONLINE_AVATAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_POSITION" EntityType="Self.SL_POSITION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_SIM" EntityType="Self.SL_SIM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_SP_GAME_SESSION" EntityType="Self.SL_SP_GAME_SESSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_TAG" EntityType="Self.SL_TAG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_TAG_LOCATION" EntityType="Self.SL_TAG_LOCATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SL_VISITOR" EntityType="Self.SL_VISITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLEOC_TEAM" EntityType="Self.SLEOC_TEAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLEOC_TEAM_MEMBER" EntityType="Self.SLEOC_TEAM_MEMBER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AVATAR_IMAGE_AVATAR" Association="Self.FK_AVATAR_IMAGE_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_AVATAR_IMAGE" EntitySet="SL_AVATAR_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AVATAR_IMAGE_IMAGE" Association="Self.FK_AVATAR_IMAGE_IMAGE">
+            <End Role="SL_IMAGE" EntitySet="SL_IMAGE" />
+            <End Role="SL_AVATAR_IMAGE" EntitySet="SL_AVATAR_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AVATAR_PROFILE_AVATAR" Association="Self.FK_AVATAR_PROFILE_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_AVATAR_PROFILE" EntitySet="SL_AVATAR_PROFILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHAT_AVATAR" Association="Self.FK_CHAT_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_CHAT" EntitySet="SL_CHAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHAT_LOCATION" Association="Self.FK_CHAT_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_CHAT" EntitySet="SL_CHAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GAME_VERSION_GAME" Association="Self.FK_GAME_VERSION_GAME">
+            <End Role="SL_GAME" EntitySet="SL_GAME" />
+            <End Role="SL_GAME_VERSION" EntitySet="SL_GAME_VERSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_AVATAR" Association="Self.FK_IMAGE_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_IMAGE" EntitySet="SL_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_AVATAR" Association="Self.FK_LOCATION_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_IMAGE_IMAGE" Association="Self.FK_LOCATION_IMAGE_IMAGE">
+            <End Role="SL_IMAGE" EntitySet="SL_IMAGE" />
+            <End Role="SL_LOCATION_IMAGE" EntitySet="SL_LOCATION_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_IMAGE_LOCATION" Association="Self.FK_LOCATION_IMAGE_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_LOCATION_IMAGE" EntitySet="SL_LOCATION_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_SETTINGS_LOCATION" Association="Self.FK_LOCATION_SETTINGS_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_LOCATION_SETTINGS" EntitySet="SL_LOCATION_SETTINGS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_SIM" Association="Self.FK_LOCATION_SIM">
+            <End Role="SL_SIM" EntitySet="SL_SIM" />
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MP_GAME_SESSION_GAME_VERSION" Association="Self.FK_MP_GAME_SESSION_GAME_VERSION">
+            <End Role="SL_GAME_VERSION" EntitySet="SL_GAME_VERSION" />
+            <End Role="SL_MP_GAME_SESSION" EntitySet="SL_MP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MP_GAME_SESSION_PLAYER_A" Association="Self.FK_MP_GAME_SESSION_PLAYER_A">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_MP_GAME_SESSION" EntitySet="SL_MP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MP_GAME_SESSION_PLAYER_B" Association="Self.FK_MP_GAME_SESSION_PLAYER_B">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_MP_GAME_SESSION" EntitySet="SL_MP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ONLINE_AVATAR_AVATAR" Association="Self.FK_ONLINE_AVATAR_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_ONLINE_AVATAR" EntitySet="SL_ONLINE_AVATAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ONLINE_AVATAR_LOCATION" Association="Self.FK_ONLINE_AVATAR_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_ONLINE_AVATAR" EntitySet="SL_ONLINE_AVATAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POSITION_AvatarID" Association="Self.FK_POSITION_AvatarID">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_POSITION" EntitySet="SL_POSITION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POSITION_SimID" Association="Self.FK_POSITION_SimID">
+            <End Role="SL_SIM" EntitySet="SL_SIM" />
+            <End Role="SL_POSITION" EntitySet="SL_POSITION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE" Association="Self.FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE">
+            <End Role="SL_AVATAR_PROFILE" EntitySet="SL_AVATAR_PROFILE" />
+            <End Role="SL_AVATAR_PROFILE_USER_PROFILE" EntitySet="SL_AVATAR_PROFILE_USER_PROFILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SL_GAME_SESSION_GAME_VERSION" Association="Self.FK_SL_GAME_SESSION_GAME_VERSION">
+            <End Role="SL_GAME_VERSION" EntitySet="SL_GAME_VERSION" />
+            <End Role="SL_SP_GAME_SESSION" EntitySet="SL_SP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SL_GAME_SESSION_PLAYER" Association="Self.FK_SL_GAME_SESSION_PLAYER">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_SP_GAME_SESSION" EntitySet="SL_SP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SLEOC_TEAM_MEMBER_AVATAR" Association="Self.FK_SLEOC_TEAM_MEMBER_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SLEOC_TEAM_MEMBER" EntitySet="SLEOC_TEAM_MEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SLEOC_TEAM_MEMBER_TEAM" Association="Self.FK_SLEOC_TEAM_MEMBER_TEAM">
+            <End Role="SLEOC_TEAM" EntitySet="SLEOC_TEAM" />
+            <End Role="SLEOC_TEAM_MEMBER" EntitySet="SLEOC_TEAM_MEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAG_LOCATION_LOCATION" Association="Self.FK_TAG_LOCATION_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_TAG_LOCATION" EntitySet="SL_TAG_LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAG_LOCATION_TAG" Association="Self.FK_TAG_LOCATION_TAG">
+            <End Role="SL_TAG" EntitySet="SL_TAG" />
+            <End Role="SL_TAG_LOCATION" EntitySet="SL_TAG_LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VISITOR_AVATAR" Association="Self.FK_VISITOR_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_VISITOR" EntitySet="SL_VISITOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VISITOR_LOCATION" Association="Self.FK_VISITOR_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_VISITOR" EntitySet="SL_VISITOR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SQL2012_947078_cdashdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SL_AVATAR">
+          <Key>
+            <PropertyRef Name="AvatarID" />
+          </Key>
+          <Property Name="AvatarID" Type="Guid" Nullable="false" />
+          <Property Name="AvatarName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AvatarRegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SL_AVATAR_IMAGE" Relationship="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_AVATAR" FromRole="SL_AVATAR" ToRole="SL_AVATAR_IMAGE" />
+          <NavigationProperty Name="SL_AVATAR_PROFILE" Relationship="SQL2012_947078_cdashdbModel.FK_AVATAR_PROFILE_AVATAR" FromRole="SL_AVATAR" ToRole="SL_AVATAR_PROFILE" />
+          <NavigationProperty Name="SL_CHAT" Relationship="SQL2012_947078_cdashdbModel.FK_CHAT_AVATAR" FromRole="SL_AVATAR" ToRole="SL_CHAT" />
+          <NavigationProperty Name="SL_IMAGE" Relationship="SQL2012_947078_cdashdbModel.FK_IMAGE_AVATAR" FromRole="SL_AVATAR" ToRole="SL_IMAGE" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_AVATAR" FromRole="SL_AVATAR" ToRole="SL_LOCATION" />
+          <NavigationProperty Name="SL_MP_GAME_SESSION" Relationship="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_A" FromRole="SL_AVATAR" ToRole="SL_MP_GAME_SESSION" />
+          <NavigationProperty Name="SL_MP_GAME_SESSION1" Relationship="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_B" FromRole="SL_AVATAR" ToRole="SL_MP_GAME_SESSION" />
+          <NavigationProperty Name="SL_ONLINE_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_AVATAR" FromRole="SL_AVATAR" ToRole="SL_ONLINE_AVATAR" />
+          <NavigationProperty Name="SL_POSITION" Relationship="SQL2012_947078_cdashdbModel.FK_POSITION_AvatarID" FromRole="SL_AVATAR" ToRole="SL_POSITION" />
+          <NavigationProperty Name="SL_SP_GAME_SESSION" Relationship="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_PLAYER" FromRole="SL_AVATAR" ToRole="SL_SP_GAME_SESSION" />
+          <NavigationProperty Name="SL_VISITOR" Relationship="SQL2012_947078_cdashdbModel.FK_VISITOR_AVATAR" FromRole="SL_AVATAR" ToRole="SL_VISITOR" />
+          <NavigationProperty Name="SLEOC_TEAM_MEMBER" Relationship="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_AVATAR" FromRole="SL_AVATAR" ToRole="SLEOC_TEAM_MEMBER" />
+        </EntityType>
+        <EntityType Name="SL_SIM">
+          <Key>
+            <PropertyRef Name="SimID" />
+          </Key>
+          <Property Name="SimID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SimName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SimDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_SIM" FromRole="SL_SIM" ToRole="SL_LOCATION" />
+          <NavigationProperty Name="SL_POSITION" Relationship="SQL2012_947078_cdashdbModel.FK_POSITION_SimID" FromRole="SL_SIM" ToRole="SL_POSITION" />
+        </EntityType>
+        <EntityContainer Name="cdashdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SL_AVATAR" EntityType="Self.SL_AVATAR" />
+          <EntitySet Name="SL_SIM" EntityType="Self.SL_SIM" />
+          <EntitySet Name="SL_AVATAR_IMAGE" EntityType="SQL2012_947078_cdashdbModel.SL_AVATAR_IMAGE" />
+          <EntitySet Name="SL_AVATAR_PROFILE" EntityType="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE" />
+          <EntitySet Name="SL_AVATAR_PROFILE_USER_PROFILE" EntityType="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE_USER_PROFILE" />
+          <EntitySet Name="SL_CHAT" EntityType="SQL2012_947078_cdashdbModel.SL_CHAT" />
+          <EntitySet Name="SL_GAME" EntityType="SQL2012_947078_cdashdbModel.SL_GAME" />
+          <EntitySet Name="SL_GAME_VERSION" EntityType="SQL2012_947078_cdashdbModel.SL_GAME_VERSION" />
+          <EntitySet Name="SL_IMAGE" EntityType="SQL2012_947078_cdashdbModel.SL_IMAGE" />
+          <EntitySet Name="SL_LOCATION" EntityType="SQL2012_947078_cdashdbModel.SL_LOCATION" />
+          <EntitySet Name="SL_LOCATION_IMAGE" EntityType="SQL2012_947078_cdashdbModel.SL_LOCATION_IMAGE" />
+          <EntitySet Name="SL_LOCATION_SETTINGS" EntityType="SQL2012_947078_cdashdbModel.SL_LOCATION_SETTINGS" />
+          <EntitySet Name="SL_MP_GAME_SESSION" EntityType="SQL2012_947078_cdashdbModel.SL_MP_GAME_SESSION" />
+          <EntitySet Name="SL_ONLINE_AVATAR" EntityType="SQL2012_947078_cdashdbModel.SL_ONLINE_AVATAR" />
+          <EntitySet Name="SL_POSITION" EntityType="SQL2012_947078_cdashdbModel.SL_POSITION" />
+          <EntitySet Name="SL_SP_GAME_SESSION" EntityType="SQL2012_947078_cdashdbModel.SL_SP_GAME_SESSION" />
+          <EntitySet Name="SL_TAG" EntityType="SQL2012_947078_cdashdbModel.SL_TAG" />
+          <EntitySet Name="SL_VISITOR" EntityType="SQL2012_947078_cdashdbModel.SL_VISITOR" />
+          <AssociationSet Name="FK_AVATAR_IMAGE_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_AVATAR_IMAGE" EntitySet="SL_AVATAR_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AVATAR_PROFILE_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_AVATAR_PROFILE_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_AVATAR_PROFILE" EntitySet="SL_AVATAR_PROFILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHAT_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_CHAT_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_CHAT" EntitySet="SL_CHAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IMAGE_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_IMAGE_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_IMAGE" EntitySet="SL_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_LOCATION_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MP_GAME_SESSION_PLAYER_A" Association="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_A">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_MP_GAME_SESSION" EntitySet="SL_MP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MP_GAME_SESSION_PLAYER_B" Association="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_B">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_MP_GAME_SESSION" EntitySet="SL_MP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ONLINE_AVATAR_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_ONLINE_AVATAR" EntitySet="SL_ONLINE_AVATAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POSITION_AvatarID" Association="SQL2012_947078_cdashdbModel.FK_POSITION_AvatarID">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_POSITION" EntitySet="SL_POSITION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SL_GAME_SESSION_PLAYER" Association="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_PLAYER">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_SP_GAME_SESSION" EntitySet="SL_SP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VISITOR_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_VISITOR_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SL_VISITOR" EntitySet="SL_VISITOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AVATAR_IMAGE_IMAGE" Association="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_IMAGE">
+            <End Role="SL_IMAGE" EntitySet="SL_IMAGE" />
+            <End Role="SL_AVATAR_IMAGE" EntitySet="SL_AVATAR_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE" Association="SQL2012_947078_cdashdbModel.FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE">
+            <End Role="SL_AVATAR_PROFILE" EntitySet="SL_AVATAR_PROFILE" />
+            <End Role="SL_AVATAR_PROFILE_USER_PROFILE" EntitySet="SL_AVATAR_PROFILE_USER_PROFILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHAT_LOCATION" Association="SQL2012_947078_cdashdbModel.FK_CHAT_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_CHAT" EntitySet="SL_CHAT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GAME_VERSION_GAME" Association="SQL2012_947078_cdashdbModel.FK_GAME_VERSION_GAME">
+            <End Role="SL_GAME" EntitySet="SL_GAME" />
+            <End Role="SL_GAME_VERSION" EntitySet="SL_GAME_VERSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MP_GAME_SESSION_GAME_VERSION" Association="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_GAME_VERSION">
+            <End Role="SL_GAME_VERSION" EntitySet="SL_GAME_VERSION" />
+            <End Role="SL_MP_GAME_SESSION" EntitySet="SL_MP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SL_GAME_SESSION_GAME_VERSION" Association="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_GAME_VERSION">
+            <End Role="SL_GAME_VERSION" EntitySet="SL_GAME_VERSION" />
+            <End Role="SL_SP_GAME_SESSION" EntitySet="SL_SP_GAME_SESSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_IMAGE_IMAGE" Association="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_IMAGE">
+            <End Role="SL_IMAGE" EntitySet="SL_IMAGE" />
+            <End Role="SL_LOCATION_IMAGE" EntitySet="SL_LOCATION_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_IMAGE_LOCATION" Association="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_LOCATION_IMAGE" EntitySet="SL_LOCATION_IMAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_SETTINGS_LOCATION" Association="SQL2012_947078_cdashdbModel.FK_LOCATION_SETTINGS_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_LOCATION_SETTINGS" EntitySet="SL_LOCATION_SETTINGS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCATION_SIM" Association="SQL2012_947078_cdashdbModel.FK_LOCATION_SIM">
+            <End Role="SL_SIM" EntitySet="SL_SIM" />
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ONLINE_AVATAR_LOCATION" Association="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_ONLINE_AVATAR" EntitySet="SL_ONLINE_AVATAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VISITOR_LOCATION" Association="SQL2012_947078_cdashdbModel.FK_VISITOR_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_VISITOR" EntitySet="SL_VISITOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POSITION_SimID" Association="SQL2012_947078_cdashdbModel.FK_POSITION_SimID">
+            <End Role="SL_SIM" EntitySet="SL_SIM" />
+            <End Role="SL_POSITION" EntitySet="SL_POSITION" />
+          </AssociationSet>
+          <AssociationSet Name="SL_TAG_LOCATION" Association="SQL2012_947078_cdashdbModel.SL_TAG_LOCATION">
+            <End Role="SL_LOCATION" EntitySet="SL_LOCATION" />
+            <End Role="SL_TAG" EntitySet="SL_TAG" />
+          </AssociationSet>
+          <EntitySet Name="SLEOC_TEAM" EntityType="SQL2012_947078_cdashdbModel.SLEOC_TEAM" />
+          <EntitySet Name="SLEOC_TEAM_MEMBER" EntityType="SQL2012_947078_cdashdbModel.SLEOC_TEAM_MEMBER" />
+          <AssociationSet Name="FK_SLEOC_TEAM_MEMBER_AVATAR" Association="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_AVATAR">
+            <End Role="SL_AVATAR" EntitySet="SL_AVATAR" />
+            <End Role="SLEOC_TEAM_MEMBER" EntitySet="SLEOC_TEAM_MEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SLEOC_TEAM_MEMBER_TEAM" Association="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_TEAM">
+            <End Role="SLEOC_TEAM" EntitySet="SLEOC_TEAM" />
+            <End Role="SLEOC_TEAM_MEMBER" EntitySet="SLEOC_TEAM_MEMBER" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SL_AVATAR_IMAGE">
+          <Key>
+            <PropertyRef Name="AvatarImageID" />
+          </Key>
+          <Property Name="AvatarImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_AVATAR" FromRole="SL_AVATAR_IMAGE" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_IMAGE" Relationship="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_IMAGE" FromRole="SL_AVATAR_IMAGE" ToRole="SL_IMAGE" />
+        </EntityType>
+        <EntityType Name="SL_AVATAR_PROFILE">
+          <Key>
+            <PropertyRef Name="ProfileHash" />
+          </Key>
+          <Property Name="ProfileHash" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_AVATAR_PROFILE_AVATAR" FromRole="SL_AVATAR_PROFILE" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_AVATAR_PROFILE_USER_PROFILE" Relationship="SQL2012_947078_cdashdbModel.FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE" FromRole="SL_AVATAR_PROFILE" ToRole="SL_AVATAR_PROFILE_USER_PROFILE" />
+        </EntityType>
+        <EntityType Name="SL_AVATAR_PROFILE_USER_PROFILE">
+          <Key>
+            <PropertyRef Name="AvatarUserID" />
+          </Key>
+          <Property Name="AvatarUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AvatarUsername" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SL_AVATAR_PROFILE" Relationship="SQL2012_947078_cdashdbModel.FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE" FromRole="SL_AVATAR_PROFILE_USER_PROFILE" ToRole="SL_AVATAR_PROFILE" />
+        </EntityType>
+        <EntityType Name="SL_CHAT">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatMessage" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ChatTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ChatIsFromSL" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_CHAT_AVATAR" FromRole="SL_CHAT" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.FK_CHAT_LOCATION" FromRole="SL_CHAT" ToRole="SL_LOCATION" />
+        </EntityType>
+        <EntityType Name="SL_GAME">
+          <Key>
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="GameID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GameIsMultiplayer" Type="Boolean" Nullable="false" />
+          <Property Name="GameDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GameIsReleased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SL_GAME_VERSION" Relationship="SQL2012_947078_cdashdbModel.FK_GAME_VERSION_GAME" FromRole="SL_GAME" ToRole="SL_GAME_VERSION" />
+        </EntityType>
+        <EntityType Name="SL_GAME_VERSION">
+          <Key>
+            <PropertyRef Name="GameVersionID" />
+          </Key>
+          <Property Name="GameVersionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameVersionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GameVersionDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GameVersionPlayCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SL_GAME" Relationship="SQL2012_947078_cdashdbModel.FK_GAME_VERSION_GAME" FromRole="SL_GAME_VERSION" ToRole="SL_GAME" />
+          <NavigationProperty Name="SL_MP_GAME_SESSION" Relationship="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_GAME_VERSION" FromRole="SL_GAME_VERSION" ToRole="SL_MP_GAME_SESSION" />
+          <NavigationProperty Name="SL_SP_GAME_SESSION" Relationship="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_GAME_VERSION" FromRole="SL_GAME_VERSION" ToRole="SL_SP_GAME_SESSION" />
+        </EntityType>
+        <EntityType Name="SL_IMAGE">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImageIsFile" Type="Boolean" Nullable="false" />
+          <Property Name="ImageTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ImageMimeType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_IMAGE_AVATAR" FromRole="SL_IMAGE" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_AVATAR_IMAGE" Relationship="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_IMAGE" FromRole="SL_IMAGE" ToRole="SL_AVATAR_IMAGE" />
+          <NavigationProperty Name="SL_LOCATION_IMAGE" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_IMAGE" FromRole="SL_IMAGE" ToRole="SL_LOCATION_IMAGE" />
+        </EntityType>
+        <EntityType Name="SL_LOCATION">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationX" Type="Double" Nullable="false" />
+          <Property Name="LocationY" Type="Double" Nullable="false" />
+          <Property Name="LocationZ" Type="Double" Nullable="false" />
+          <Property Name="LocationDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_AVATAR" FromRole="SL_LOCATION" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_CHAT" Relationship="SQL2012_947078_cdashdbModel.FK_CHAT_LOCATION" FromRole="SL_LOCATION" ToRole="SL_CHAT" />
+          <NavigationProperty Name="SL_LOCATION_IMAGE" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_LOCATION" FromRole="SL_LOCATION" ToRole="SL_LOCATION_IMAGE" />
+          <NavigationProperty Name="SL_LOCATION_SETTINGS" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_SETTINGS_LOCATION" FromRole="SL_LOCATION" ToRole="SL_LOCATION_SETTINGS" />
+          <NavigationProperty Name="SL_SIM" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_SIM" FromRole="SL_LOCATION" ToRole="SL_SIM" />
+          <NavigationProperty Name="SL_ONLINE_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_LOCATION" FromRole="SL_LOCATION" ToRole="SL_ONLINE_AVATAR" />
+          <NavigationProperty Name="SL_VISITOR" Relationship="SQL2012_947078_cdashdbModel.FK_VISITOR_LOCATION" FromRole="SL_LOCATION" ToRole="SL_VISITOR" />
+          <NavigationProperty Name="SL_TAG" Relationship="SQL2012_947078_cdashdbModel.SL_TAG_LOCATION" FromRole="SL_LOCATION" ToRole="SL_TAG" />
+        </EntityType>
+        <EntityType Name="SL_LOCATION_IMAGE">
+          <Key>
+            <PropertyRef Name="LocationImageID" />
+          </Key>
+          <Property Name="LocationImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SL_IMAGE" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_IMAGE" FromRole="SL_LOCATION_IMAGE" ToRole="SL_IMAGE" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_LOCATION" FromRole="SL_LOCATION_IMAGE" ToRole="SL_LOCATION" />
+        </EntityType>
+        <EntityType Name="SL_LOCATION_SETTINGS">
+          <Key>
+            <PropertyRef Name="LocationSettingsID" />
+          </Key>
+          <Property Name="LocationSettingsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationChatIsOn" Type="Boolean" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.FK_LOCATION_SETTINGS_LOCATION" FromRole="SL_LOCATION_SETTINGS" ToRole="SL_LOCATION" />
+        </EntityType>
+        <EntityType Name="SL_MP_GAME_SESSION">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionScore_A" Type="Int32" Nullable="false" />
+          <Property Name="SessionScore_B" Type="Int32" Nullable="false" />
+          <Property Name="SessionTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_A" FromRole="SL_MP_GAME_SESSION" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_AVATAR1" Relationship="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_B" FromRole="SL_MP_GAME_SESSION" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_GAME_VERSION" Relationship="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_GAME_VERSION" FromRole="SL_MP_GAME_SESSION" ToRole="SL_GAME_VERSION" />
+        </EntityType>
+        <EntityType Name="SL_ONLINE_AVATAR">
+          <Key>
+            <PropertyRef Name="OnlineAvatarID" />
+          </Key>
+          <Property Name="OnlineAvatarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OnlineAvatarIsActive" Type="Boolean" Nullable="false" />
+          <Property Name="OnlineAvatarTimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_AVATAR" FromRole="SL_ONLINE_AVATAR" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_LOCATION" FromRole="SL_ONLINE_AVATAR" ToRole="SL_LOCATION" />
+        </EntityType>
+        <EntityType Name="SL_POSITION">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionX" Type="Double" Nullable="false" />
+          <Property Name="PositionY" Type="Double" Nullable="false" />
+          <Property Name="PositionZ" Type="Double" Nullable="false" />
+          <Property Name="PositionTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_POSITION_AvatarID" FromRole="SL_POSITION" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_SIM" Relationship="SQL2012_947078_cdashdbModel.FK_POSITION_SimID" FromRole="SL_POSITION" ToRole="SL_SIM" />
+        </EntityType>
+        <EntityType Name="SL_SP_GAME_SESSION">
+          <Key>
+            <PropertyRef Name="SessionID" />
+          </Key>
+          <Property Name="SessionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionScore" Type="Int32" Nullable="false" />
+          <Property Name="SessionTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_PLAYER" FromRole="SL_SP_GAME_SESSION" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_GAME_VERSION" Relationship="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_GAME_VERSION" FromRole="SL_SP_GAME_SESSION" ToRole="SL_GAME_VERSION" />
+        </EntityType>
+        <EntityType Name="SL_TAG">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TagDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TagIconName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.SL_TAG_LOCATION" FromRole="SL_TAG" ToRole="SL_LOCATION" />
+        </EntityType>
+        <EntityType Name="SL_VISITOR">
+          <Key>
+            <PropertyRef Name="VisitorID" />
+          </Key>
+          <Property Name="VisitorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitorTimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_VISITOR_AVATAR" FromRole="SL_VISITOR" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SL_LOCATION" Relationship="SQL2012_947078_cdashdbModel.FK_VISITOR_LOCATION" FromRole="SL_VISITOR" ToRole="SL_LOCATION" />
+        </EntityType>
+        <Association Name="FK_AVATAR_IMAGE_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR_IMAGE" Role="SL_AVATAR_IMAGE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_AVATAR_PROFILE_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE" Role="SL_AVATAR_PROFILE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CHAT_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_CHAT" Role="SL_CHAT" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_IMAGE_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="0..1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_IMAGE" Role="SL_IMAGE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_LOCATION_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_MP_GAME_SESSION_PLAYER_A">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_MP_GAME_SESSION" Role="SL_MP_GAME_SESSION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_MP_GAME_SESSION_PLAYER_B">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_MP_GAME_SESSION" Role="SL_MP_GAME_SESSION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_ONLINE_AVATAR_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_ONLINE_AVATAR" Role="SL_ONLINE_AVATAR" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_POSITION_AvatarID">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_POSITION" Role="SL_POSITION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_SL_GAME_SESSION_PLAYER">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_SP_GAME_SESSION" Role="SL_SP_GAME_SESSION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_VISITOR_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_VISITOR" Role="SL_VISITOR" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_AVATAR_IMAGE_IMAGE">
+          <End Type="SQL2012_947078_cdashdbModel.SL_IMAGE" Role="SL_IMAGE" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR_IMAGE" Role="SL_AVATAR_IMAGE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE" Role="SL_AVATAR_PROFILE" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE_USER_PROFILE" Role="SL_AVATAR_PROFILE_USER_PROFILE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CHAT_LOCATION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_CHAT" Role="SL_CHAT" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_GAME_VERSION_GAME">
+          <End Type="SQL2012_947078_cdashdbModel.SL_GAME" Role="SL_GAME" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_GAME_VERSION" Role="SL_GAME_VERSION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_MP_GAME_SESSION_GAME_VERSION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_GAME_VERSION" Role="SL_GAME_VERSION" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_MP_GAME_SESSION" Role="SL_MP_GAME_SESSION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_SL_GAME_SESSION_GAME_VERSION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_GAME_VERSION" Role="SL_GAME_VERSION" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_SP_GAME_SESSION" Role="SL_SP_GAME_SESSION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_LOCATION_IMAGE_IMAGE">
+          <End Type="SQL2012_947078_cdashdbModel.SL_IMAGE" Role="SL_IMAGE" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION_IMAGE" Role="SL_LOCATION_IMAGE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_LOCATION_IMAGE_LOCATION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION_IMAGE" Role="SL_LOCATION_IMAGE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_LOCATION_SETTINGS_LOCATION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION_SETTINGS" Role="SL_LOCATION_SETTINGS" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_LOCATION_SIM">
+          <End Type="SQL2012_947078_cdashdbModel.SL_SIM" Role="SL_SIM" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_ONLINE_AVATAR_LOCATION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_ONLINE_AVATAR" Role="SL_ONLINE_AVATAR" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_VISITOR_LOCATION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_VISITOR" Role="SL_VISITOR" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_POSITION_SimID">
+          <End Type="SQL2012_947078_cdashdbModel.SL_SIM" Role="SL_SIM" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_POSITION" Role="SL_POSITION" Multiplicity="*" />
+        </Association>
+        <Association Name="SL_TAG_LOCATION">
+          <End Type="SQL2012_947078_cdashdbModel.SL_LOCATION" Role="SL_LOCATION" Multiplicity="*" />
+          <End Type="SQL2012_947078_cdashdbModel.SL_TAG" Role="SL_TAG" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SLEOC_TEAM">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TeamDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SLEOC_TEAM_MEMBER" Relationship="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_TEAM" FromRole="SLEOC_TEAM" ToRole="SLEOC_TEAM_MEMBER" />
+        </EntityType>
+        <EntityType Name="SLEOC_TEAM_MEMBER">
+          <Key>
+            <PropertyRef Name="TeamMemberID" />
+          </Key>
+          <Property Name="TeamMemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SL_AVATAR" Relationship="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_AVATAR" FromRole="SLEOC_TEAM_MEMBER" ToRole="SL_AVATAR" />
+          <NavigationProperty Name="SLEOC_TEAM" Relationship="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_TEAM" FromRole="SLEOC_TEAM_MEMBER" ToRole="SLEOC_TEAM" />
+        </EntityType>
+        <Association Name="FK_SLEOC_TEAM_MEMBER_AVATAR">
+          <End Type="SQL2012_947078_cdashdbModel.SL_AVATAR" Role="SL_AVATAR" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SLEOC_TEAM_MEMBER" Role="SLEOC_TEAM_MEMBER" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_SLEOC_TEAM_MEMBER_TEAM">
+          <End Type="SQL2012_947078_cdashdbModel.SLEOC_TEAM" Role="SLEOC_TEAM" Multiplicity="1" />
+          <End Type="SQL2012_947078_cdashdbModel.SLEOC_TEAM_MEMBER" Role="SLEOC_TEAM_MEMBER" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SQL2012_947078_cdashdbModelStoreContainer" CdmEntityContainer="cdashdbEntities">
+          <EntitySetMapping Name="SL_AVATAR">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_AVATAR">
+              <MappingFragment StoreEntitySet="SL_AVATAR">
+                <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+                <ScalarProperty Name="AvatarName" ColumnName="AvatarName" />
+                <ScalarProperty Name="AvatarRegisterDate" ColumnName="AvatarRegisterDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_SIM">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_SIM">
+              <MappingFragment StoreEntitySet="SL_SIM">
+                <ScalarProperty Name="SimID" ColumnName="SimID" />
+                <ScalarProperty Name="SimName" ColumnName="SimName" />
+                <ScalarProperty Name="SimDescription" ColumnName="SimDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_AVATAR_IMAGE">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_AVATAR_IMAGE">
+              <MappingFragment StoreEntitySet="SL_AVATAR_IMAGE">
+                <ScalarProperty Name="AvatarImageID" ColumnName="AvatarImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_AVATAR_PROFILE">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE">
+              <MappingFragment StoreEntitySet="SL_AVATAR_PROFILE">
+                <ScalarProperty Name="ProfileHash" ColumnName="ProfileHash" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_AVATAR_PROFILE_USER_PROFILE">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE_USER_PROFILE">
+              <MappingFragment StoreEntitySet="SL_AVATAR_PROFILE_USER_PROFILE">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AvatarUsername" ColumnName="AvatarUsername" />
+                <ScalarProperty Name="AvatarUserID" ColumnName="AvatarUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_CHAT">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_CHAT">
+              <MappingFragment StoreEntitySet="SL_CHAT">
+                <ScalarProperty Name="ChatIsFromSL" ColumnName="ChatIsFromSL" />
+                <ScalarProperty Name="ChatTimeStamp" ColumnName="ChatTimeStamp" />
+                <ScalarProperty Name="ChatMessage" ColumnName="ChatMessage" />
+                <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_GAME">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_GAME">
+              <MappingFragment StoreEntitySet="SL_GAME">
+                <ScalarProperty Name="GameIsReleased" ColumnName="GameIsReleased" />
+                <ScalarProperty Name="GameDescription" ColumnName="GameDescription" />
+                <ScalarProperty Name="GameIsMultiplayer" ColumnName="GameIsMultiplayer" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_GAME_VERSION">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_GAME_VERSION">
+              <MappingFragment StoreEntitySet="SL_GAME_VERSION">
+                <ScalarProperty Name="GameVersionPlayCount" ColumnName="GameVersionPlayCount" />
+                <ScalarProperty Name="GameVersionDescription" ColumnName="GameVersionDescription" />
+                <ScalarProperty Name="GameVersionName" ColumnName="GameVersionName" />
+                <ScalarProperty Name="GameVersionID" ColumnName="GameVersionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_IMAGE">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_IMAGE">
+              <MappingFragment StoreEntitySet="SL_IMAGE">
+                <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+                <ScalarProperty Name="ImageUploadDate" ColumnName="ImageUploadDate" />
+                <ScalarProperty Name="ImageTitle" ColumnName="ImageTitle" />
+                <ScalarProperty Name="ImageIsFile" ColumnName="ImageIsFile" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_LOCATION">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_LOCATION">
+              <MappingFragment StoreEntitySet="SL_LOCATION">
+                <ScalarProperty Name="LocationDescription" ColumnName="LocationDescription" />
+                <ScalarProperty Name="LocationZ" ColumnName="LocationZ" />
+                <ScalarProperty Name="LocationY" ColumnName="LocationY" />
+                <ScalarProperty Name="LocationX" ColumnName="LocationX" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_LOCATION_IMAGE">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_LOCATION_IMAGE">
+              <MappingFragment StoreEntitySet="SL_LOCATION_IMAGE">
+                <ScalarProperty Name="LocationImageID" ColumnName="LocationImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_LOCATION_SETTINGS">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_LOCATION_SETTINGS">
+              <MappingFragment StoreEntitySet="SL_LOCATION_SETTINGS">
+                <ScalarProperty Name="LocationChatIsOn" ColumnName="LocationChatIsOn" />
+                <ScalarProperty Name="LocationSettingsID" ColumnName="LocationSettingsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_MP_GAME_SESSION">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_MP_GAME_SESSION">
+              <MappingFragment StoreEntitySet="SL_MP_GAME_SESSION">
+                <ScalarProperty Name="SessionTime" ColumnName="SessionTime" />
+                <ScalarProperty Name="SessionScore_B" ColumnName="SessionScore_B" />
+                <ScalarProperty Name="SessionScore_A" ColumnName="SessionScore_A" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_ONLINE_AVATAR">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_ONLINE_AVATAR">
+              <MappingFragment StoreEntitySet="SL_ONLINE_AVATAR">
+                <ScalarProperty Name="OnlineAvatarTimeStamp" ColumnName="OnlineAvatarTimeStamp" />
+                <ScalarProperty Name="OnlineAvatarIsActive" ColumnName="OnlineAvatarIsActive" />
+                <ScalarProperty Name="OnlineAvatarID" ColumnName="OnlineAvatarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_POSITION">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_POSITION">
+              <MappingFragment StoreEntitySet="SL_POSITION">
+                <ScalarProperty Name="PositionTimeStamp" ColumnName="PositionTimeStamp" />
+                <ScalarProperty Name="PositionZ" ColumnName="PositionZ" />
+                <ScalarProperty Name="PositionY" ColumnName="PositionY" />
+                <ScalarProperty Name="PositionX" ColumnName="PositionX" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_SP_GAME_SESSION">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_SP_GAME_SESSION">
+              <MappingFragment StoreEntitySet="SL_SP_GAME_SESSION">
+                <ScalarProperty Name="SessionTime" ColumnName="SessionTime" />
+                <ScalarProperty Name="SessionScore" ColumnName="SessionScore" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_TAG">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_TAG">
+              <MappingFragment StoreEntitySet="SL_TAG">
+                <ScalarProperty Name="TagIconName" ColumnName="TagIconName" />
+                <ScalarProperty Name="TagDescription" ColumnName="TagDescription" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SL_VISITOR">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SL_VISITOR">
+              <MappingFragment StoreEntitySet="SL_VISITOR">
+                <ScalarProperty Name="VisitorTimeStamp" ColumnName="VisitorTimeStamp" />
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_AVATAR_IMAGE_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_AVATAR" StoreEntitySet="SL_AVATAR_IMAGE">
+            <EndProperty Name="SL_AVATAR_IMAGE">
+              <ScalarProperty Name="AvatarImageID" ColumnName="AvatarImageID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_AVATAR_PROFILE_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_AVATAR_PROFILE_AVATAR" StoreEntitySet="SL_AVATAR_PROFILE">
+            <EndProperty Name="SL_AVATAR_PROFILE">
+              <ScalarProperty Name="ProfileHash" ColumnName="ProfileHash" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CHAT_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_CHAT_AVATAR" StoreEntitySet="SL_CHAT">
+            <EndProperty Name="SL_CHAT">
+              <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_IMAGE_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_IMAGE_AVATAR" StoreEntitySet="SL_IMAGE">
+            <EndProperty Name="SL_IMAGE">
+              <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="UploaderID" />
+            </EndProperty>
+            <Condition ColumnName="UploaderID" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_LOCATION_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_LOCATION_AVATAR" StoreEntitySet="SL_LOCATION">
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="OwnerID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_MP_GAME_SESSION_PLAYER_A" TypeName="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_A" StoreEntitySet="SL_MP_GAME_SESSION">
+            <EndProperty Name="SL_MP_GAME_SESSION">
+              <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="PlayerID_A" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_MP_GAME_SESSION_PLAYER_B" TypeName="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_B" StoreEntitySet="SL_MP_GAME_SESSION">
+            <EndProperty Name="SL_MP_GAME_SESSION">
+              <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="PlayerID_B" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ONLINE_AVATAR_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_AVATAR" StoreEntitySet="SL_ONLINE_AVATAR">
+            <EndProperty Name="SL_ONLINE_AVATAR">
+              <ScalarProperty Name="OnlineAvatarID" ColumnName="OnlineAvatarID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_POSITION_AvatarID" TypeName="SQL2012_947078_cdashdbModel.FK_POSITION_AvatarID" StoreEntitySet="SL_POSITION">
+            <EndProperty Name="SL_POSITION">
+              <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_SL_GAME_SESSION_PLAYER" TypeName="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_PLAYER" StoreEntitySet="SL_SP_GAME_SESSION">
+            <EndProperty Name="SL_SP_GAME_SESSION">
+              <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="PlayerID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_VISITOR_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_VISITOR_AVATAR" StoreEntitySet="SL_VISITOR">
+            <EndProperty Name="SL_VISITOR">
+              <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_AVATAR_IMAGE_IMAGE" TypeName="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_IMAGE" StoreEntitySet="SL_AVATAR_IMAGE">
+            <EndProperty Name="SL_AVATAR_IMAGE">
+              <ScalarProperty Name="AvatarImageID" ColumnName="AvatarImageID" />
+            </EndProperty>
+            <EndProperty Name="SL_IMAGE">
+              <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE" TypeName="SQL2012_947078_cdashdbModel.FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE" StoreEntitySet="SL_AVATAR_PROFILE_USER_PROFILE">
+            <EndProperty Name="SL_AVATAR_PROFILE_USER_PROFILE">
+              <ScalarProperty Name="AvatarUserID" ColumnName="AvatarUserID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR_PROFILE">
+              <ScalarProperty Name="ProfileHash" ColumnName="ProfileHash" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CHAT_LOCATION" TypeName="SQL2012_947078_cdashdbModel.FK_CHAT_LOCATION" StoreEntitySet="SL_CHAT">
+            <EndProperty Name="SL_CHAT">
+              <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+            </EndProperty>
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_GAME_VERSION_GAME" TypeName="SQL2012_947078_cdashdbModel.FK_GAME_VERSION_GAME" StoreEntitySet="SL_GAME_VERSION">
+            <EndProperty Name="SL_GAME_VERSION">
+              <ScalarProperty Name="GameVersionID" ColumnName="GameVersionID" />
+            </EndProperty>
+            <EndProperty Name="SL_GAME">
+              <ScalarProperty Name="GameID" ColumnName="GameID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_MP_GAME_SESSION_GAME_VERSION" TypeName="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_GAME_VERSION" StoreEntitySet="SL_MP_GAME_SESSION">
+            <EndProperty Name="SL_MP_GAME_SESSION">
+              <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+            </EndProperty>
+            <EndProperty Name="SL_GAME_VERSION">
+              <ScalarProperty Name="GameVersionID" ColumnName="GameVersionID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_SL_GAME_SESSION_GAME_VERSION" TypeName="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_GAME_VERSION" StoreEntitySet="SL_SP_GAME_SESSION">
+            <EndProperty Name="SL_SP_GAME_SESSION">
+              <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+            </EndProperty>
+            <EndProperty Name="SL_GAME_VERSION">
+              <ScalarProperty Name="GameVersionID" ColumnName="GameVersionID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_LOCATION_IMAGE_IMAGE" TypeName="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_IMAGE" StoreEntitySet="SL_LOCATION_IMAGE">
+            <EndProperty Name="SL_LOCATION_IMAGE">
+              <ScalarProperty Name="LocationImageID" ColumnName="LocationImageID" />
+            </EndProperty>
+            <EndProperty Name="SL_IMAGE">
+              <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_LOCATION_IMAGE_LOCATION" TypeName="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_LOCATION" StoreEntitySet="SL_LOCATION_IMAGE">
+            <EndProperty Name="SL_LOCATION_IMAGE">
+              <ScalarProperty Name="LocationImageID" ColumnName="LocationImageID" />
+            </EndProperty>
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_LOCATION_SETTINGS_LOCATION" TypeName="SQL2012_947078_cdashdbModel.FK_LOCATION_SETTINGS_LOCATION" StoreEntitySet="SL_LOCATION_SETTINGS">
+            <EndProperty Name="SL_LOCATION_SETTINGS">
+              <ScalarProperty Name="LocationSettingsID" ColumnName="LocationSettingsID" />
+            </EndProperty>
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_LOCATION_SIM" TypeName="SQL2012_947078_cdashdbModel.FK_LOCATION_SIM" StoreEntitySet="SL_LOCATION">
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+            <EndProperty Name="SL_SIM">
+              <ScalarProperty Name="SimID" ColumnName="SimID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ONLINE_AVATAR_LOCATION" TypeName="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_LOCATION" StoreEntitySet="SL_ONLINE_AVATAR">
+            <EndProperty Name="SL_ONLINE_AVATAR">
+              <ScalarProperty Name="OnlineAvatarID" ColumnName="OnlineAvatarID" />
+            </EndProperty>
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_VISITOR_LOCATION" TypeName="SQL2012_947078_cdashdbModel.FK_VISITOR_LOCATION" StoreEntitySet="SL_VISITOR">
+            <EndProperty Name="SL_VISITOR">
+              <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+            </EndProperty>
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_POSITION_SimID" TypeName="SQL2012_947078_cdashdbModel.FK_POSITION_SimID" StoreEntitySet="SL_POSITION">
+            <EndProperty Name="SL_POSITION">
+              <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+            </EndProperty>
+            <EndProperty Name="SL_SIM">
+              <ScalarProperty Name="SimID" ColumnName="SimID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SL_TAG_LOCATION" TypeName="SQL2012_947078_cdashdbModel.SL_TAG_LOCATION" StoreEntitySet="SL_TAG_LOCATION">
+            <EndProperty Name="SL_TAG">
+              <ScalarProperty Name="TagID" ColumnName="TagID" />
+            </EndProperty>
+            <EndProperty Name="SL_LOCATION">
+              <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="SLEOC_TEAM">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SLEOC_TEAM">
+              <MappingFragment StoreEntitySet="SLEOC_TEAM">
+                <ScalarProperty Name="TeamDescription" ColumnName="TeamDescription" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLEOC_TEAM_MEMBER">
+            <EntityTypeMapping TypeName="SQL2012_947078_cdashdbModel.SLEOC_TEAM_MEMBER">
+              <MappingFragment StoreEntitySet="SLEOC_TEAM_MEMBER">
+                <ScalarProperty Name="TeamMemberID" ColumnName="TeamMemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_SLEOC_TEAM_MEMBER_AVATAR" TypeName="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_AVATAR" StoreEntitySet="SLEOC_TEAM_MEMBER">
+            <EndProperty Name="SLEOC_TEAM_MEMBER">
+              <ScalarProperty Name="TeamMemberID" ColumnName="TeamMemberID" />
+            </EndProperty>
+            <EndProperty Name="SL_AVATAR">
+              <ScalarProperty Name="AvatarID" ColumnName="AvatarID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_SLEOC_TEAM_MEMBER_TEAM" TypeName="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_TEAM" StoreEntitySet="SLEOC_TEAM_MEMBER">
+            <EndProperty Name="SLEOC_TEAM_MEMBER">
+              <ScalarProperty Name="TeamMemberID" ColumnName="TeamMemberID" />
+            </EndProperty>
+            <EndProperty Name="SLEOC_TEAM">
+              <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

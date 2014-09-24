@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="05fb50a28f284ca7bdc609d6d3fe91f5" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_AVATAR" Width="1.5" PointX="5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_SIM" Width="1.5" PointX="10.625" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_AVATAR_IMAGE" Width="1.875" PointX="8.25" PointY="17.25" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE" Width="2" PointX="1.875" PointY="24" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_AVATAR_PROFILE_USER_PROFILE" Width="2.625" PointX="1.875" PointY="21" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_CHAT" Width="1.5" PointX="6.25" PointY="4.125" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_GAME" Width="1.5" PointX="3.375" PointY="5.875" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_GAME_VERSION" Width="1.5" PointX="1" PointY="6" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_IMAGE" Width="1.5" PointX="11.5" PointY="19.625" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_LOCATION" Width="1.5" PointX="11.75" PointY="3.625" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_LOCATION_IMAGE" Width="2" PointX="15.25" PointY="17.875" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_LOCATION_SETTINGS" Width="2.75" PointX="15.75" PointY="11.375" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_MP_GAME_SESSION" Width="2.25" PointX="2.125" PointY="12.25" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_ONLINE_AVATAR" Width="2" PointX="17.625" PointY="4.5" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_POSITION" Width="1.5" PointX="8.25" PointY="8.875" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_SP_GAME_SESSION" Width="2.125" PointX="2" PointY="1.625" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_TAG" Width="1.5" PointX="9.5" PointY="2.75" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SL_VISITOR" Width="1.5" PointX="11.5" PointY="0.5" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_AVATAR" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_AVATAR_PROFILE_AVATAR" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_CHAT_AVATAR" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_IMAGE_AVATAR" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_LOCATION_AVATAR" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_A" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_PLAYER_B" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_AVATAR" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_POSITION_AvatarID" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_PLAYER" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_VISITOR_AVATAR" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_AVATAR_IMAGE_IMAGE" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_SL_AVATAR_PROFILE_USER_PROFILE_AVATAR_PROFILE" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_CHAT_LOCATION" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_GAME_VERSION_GAME" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_MP_GAME_SESSION_GAME_VERSION" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_SL_GAME_SESSION_GAME_VERSION" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_IMAGE" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_LOCATION_IMAGE_LOCATION" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_LOCATION_SETTINGS_LOCATION" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_LOCATION_SIM" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_ONLINE_AVATAR_LOCATION" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_VISITOR_LOCATION" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_POSITION_SimID" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.SL_TAG_LOCATION" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SLEOC_TEAM" Width="1.5" PointX="8.625" PointY="12.5" />
+        <EntityTypeShape EntityType="SQL2012_947078_cdashdbModel.SLEOC_TEAM_MEMBER" Width="1.5" PointX="10.875" PointY="17.625" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_AVATAR" />
+        <AssociationConnector Association="SQL2012_947078_cdashdbModel.FK_SLEOC_TEAM_MEMBER_TEAM" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
