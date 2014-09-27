@@ -1,7 +1,7 @@
-﻿@model SLEOC.Models.CardListModel
+﻿@model SLEOC.Models.CardMosaicTextModel
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "MosaicText";
 }
 
 <link href="//fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,500,500italic,300,300italic,100,100italic" rel="stylesheet" type="text/css">
@@ -17,13 +17,21 @@
 </script>
 
     <article>
-        <section>
-            <ul class="text-x-small">
-                @foreach (var itemstring in Model.Item)
+        <figure>
+            <ul class="mosaic mosaic@(SLEOC.Helpers.MathHelpers.Clamp(Model.ImageURL.Count, 1, 8))">
+                @for (int i = 0; i < Math.Min(Model.ImageURL.Count, 8); i++)
                 {
-                    <li>@Html.Raw(itemstring)</li>
+                    <li style="background-image: url(@Model.ImageURL[i])"></li>
                 }
             </ul>
+        </figure>
+        <section>
+            <p>
+                @Html.Raw(Model.Title)
+            </p>
+            <p>
+                @Html.Raw(Model.Description)
+            </p>
         </section>
         @if (Model.ShowLeftFooter)
         {
@@ -43,5 +51,3 @@
             </footer>
         }
     </article>
-
-

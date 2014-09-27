@@ -218,10 +218,12 @@
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Helpers\XOR.cs" />
     <Compile Include="Models\Card.cs" />
-    <Compile Include="Models\CardEventModel.cs" />
-    <Compile Include="Models\CardImageModel.cs" />
+    <Compile Include="Models\CardHybridMosaicModel.cs" />
+    <Compile Include="Models\CardMosaicTextModel.cs" />
+    <Compile Include="Models\CardTextModel.cs" />
+    <Compile Include="Models\CardHybridModel.cs" />
     <Compile Include="Models\CardListModel.cs" />
-    <Compile Include="Models\CardMosaicModel.cs" />
+    <Compile Include="Models\CardMosaicListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SLEOCEntityModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -304,8 +306,8 @@
     <Content Include="Content\css\google_glass.css" />
     <Content Include="Content\css\google_glass_ui.css" />
     <Content Include="Content\images\defaultimage.png" />
-    <Content Include="Content\images\navigate.previous.svg" />
     <Content Include="Content\images\navigate.next.svg" />
+    <Content Include="Content\images\navigate.previous.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -409,8 +411,8 @@
     <Content Include="Views\Start\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Card\Event.cshtml" />
-    <Content Include="Views\Card\Image.cshtml" />
+    <Content Include="Views\Card\Text.cshtml" />
+    <Content Include="Views\Card\Hybrid.cshtml" />
     <EntityDeploy Include="SLEOCEntityModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SLEOCEntityModel.Designer.cs</LastGenOutput>
@@ -429,11 +431,16 @@
       <LastGenOutput>SLEOCEntityModel.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Card\List.cshtml" />
-    <Content Include="Views\Card\Mosaic.cshtml" />
-    <Content Include="Views\EncryptedCard\Event.cshtml" />
+    <Content Include="Views\Card\MosaicList.cshtml" />
+    <Content Include="Views\EncryptedCard\Text.cshtml" />
     <Content Include="Views\Debug\Xor.cshtml" />
-    <Content Include="Views\EncryptedCard\Image.cshtml" />
-    <Content Include="Views\EncryptedCard\Mosaic.cshtml" />
+    <Content Include="Views\EncryptedCard\Hybrid.cshtml" />
+    <Content Include="Views\EncryptedCard\MosaicList.cshtml" />
+    <Content Include="Views\EncryptedCard\List.cshtml" />
+    <Content Include="Views\Card\HybridMosaic.cshtml" />
+    <Content Include="Views\EncryptedCard\HybridMosaic.cshtml" />
+    <Content Include="Views\Card\MosaicText.cshtml" />
+    <Content Include="Views\EncryptedCard\MosaicText.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

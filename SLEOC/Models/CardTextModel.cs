@@ -5,14 +5,14 @@ using System.Web;
 
 namespace SLEOC.Models
 {
-    public class CardEventModel : Card
+    public class CardTextModel : Card
     {
         public string Title {get; set;}
         public string Description {get; set;}
 
-        public CardEventModel()
+        public CardTextModel()
         {
-            Title = "&lt;span class=&quot;green&quot;&gt;"+  DateTime.Now.ToShortTimeString() + "&lt;/span&gt;";
+            Title = "&lt;span class=&quot;muted&quot;&gt;Title&lt;/span&gt;";
             Description = "Description";
         }
     }

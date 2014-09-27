@@ -7,17 +7,17 @@ namespace SLEOC.Models
 {
     public class Card
     {
-        public string FooterLeft { get; set; }
-        public Boolean ShowFooterLeft { get; set; }
-        public string FooterRight{ get; set; }
-        public Boolean ShowFooterRight { get; set; }
+        public string LeftFooter { get; set; }
+        public Boolean ShowLeftFooter { get; set; }
+        public string RightFooter { get; set; }
+        public Boolean ShowRightFooter { get; set; }
 
         public Card()
         {
-            FooterLeft = "&lt;span class=&quot;muted&quot;&gt;Footer&lt;/span&gt;";
-            ShowFooterLeft = false;
-            FooterRight = DateTime.Now.ToShortTimeString();
-            ShowFooterRight = false;
+            LeftFooter = "&lt;span class=&quot;muted&quot;&gt;Footer&lt;/span&gt;";
+            ShowLeftFooter = false;
+            RightFooter = DateTime.Now.ToShortTimeString();
+            ShowRightFooter = false;
         }
     }
 }

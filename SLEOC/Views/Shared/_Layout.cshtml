@@ -3,19 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <title>Google Glass UI - @ViewBag.Title</title>
-        <!---Bundle Config Uncomment if Bundling Works on Server-->
-    @*@Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/google_glass")
-        @Styles.Render("~/Content/css")*@
     </head>
     <body class="full">
         <div id="scalable" class="scalable">
-            <div id="card" class="card">
-                <div id="leftscroll" class="scroll leftscroll"></div>
-                @RenderBody()
-                <div id="rightscroll" class="scroll rightscroll"></div>
-            </div>
+            @RenderBody()
         </div>
     </body>
 </html>
