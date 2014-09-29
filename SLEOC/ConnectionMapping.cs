@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace site
+namespace SLEOC
 {
     public class ConnectionMapping<T>
     {

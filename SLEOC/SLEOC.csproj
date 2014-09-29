@@ -49,6 +49,9 @@
     <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Owin.1.2.2\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
@@ -206,6 +209,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ConnectionMapping.cs" />
+    <Compile Include="Controllers\CardApiController.cs" />
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\EncryptedCardController.cs" />
@@ -217,6 +221,7 @@
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Helpers\XOR.cs" />
+    <Compile Include="CardHub.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardHybridMosaicModel.cs" />
     <Compile Include="Models\CardMosaicTextModel.cs" />
@@ -224,6 +229,7 @@
     <Compile Include="Models\CardHybridModel.cs" />
     <Compile Include="Models\CardListModel.cs" />
     <Compile Include="Models\CardMosaicListModel.cs" />
+    <Compile Include="Models\InterfaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SLEOCEntityModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -441,6 +447,7 @@
     <Content Include="Views\EncryptedCard\HybridMosaic.cshtml" />
     <Content Include="Views\Card\MosaicText.cshtml" />
     <Content Include="Views\EncryptedCard\MosaicText.cshtml" />
+    <Content Include="Views\Start\Interface.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

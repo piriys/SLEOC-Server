@@ -1,0 +1,152 @@
+﻿@model SLEOC.Models.InterfaceModel
+
+@{
+    ViewBag.Title = "Interface";
+}
+
+<!--SignalR-->
+<script src="@Url.Content("~/Scripts/jquery.signalR-2.1.2.js")"></script>
+<script src="~/signalr/hubs"></script>
+<script>
+    function jumpToCard(page) {
+        var card = document.getElementById("card");
+        var left = page * 640;
+        left = 640 * Math.floor(left / 640);
+        card.style.left = (left * -1) + "px";
+        updateScrollButton();
+    }
+
+    function jumpToLatestCard() {
+        var latestPage = jQuery("#card article").length - 1;
+        jumpToCard(latestPage);
+    }
+
+    function updateScrollButton() {
+        var card = document.getElementById("card");
+        var leftScroll = document.getElementById("previousCard");
+        var rightScroll = document.getElementById("nextCard");
+        var count = jQuery("#card article").length;
+        var left = parseFloat(card.style.left);
+
+        console.log("left: " + left);
+
+        if (left == 0)
+        {
+            console.log("Hiding left button")
+            leftScroll.style.display = "none";
+        }
+        else
+        {
+            console.log("Showing left button")
+            leftScroll.style.display = "block";
+        }
+
+        if (left > (count - 1) * -640)
+        {
+            console.log("Showing right button")
+            rightScroll.style.display = "block";
+        }
+        else
+        {
+            console.log("Hiding right button")
+            rightScroll.style.display = "none";
+        }
+    }
+
+    function nextCard()
+    {
+        var card = document.getElementById("card");
+        var left = card.getBoundingClientRect().left - 640;
+        left = 640 * Math.floor(left / 640);
+        card.style.left = left + "px";
+        updateScrollButton();
+    }
+
+    function previousCard()
+    {
+        var card = document.getElementById("card");
+        var left = card.getBoundingClientRect().left + 640;
+        left = 640 * Math.floor(left / 640);
+        card.style.left = left + "px";
+        updateScrollButton();
+    }
+
+    function initialize()
+    {
+        var card = document.getElementById("card");
+        var leftScroll = document.getElementById("previousCard");
+        var rightScroll = document.getElementById("nextCard");
+
+        card.style.left = "0px";
+        leftScroll.style.display = "none";
+        rightScroll.style.display = "none";
+        updateScrollButton();
+    }
+
+    jQuery(function () {
+        initialize();
+
+        // Reference the auto-generated proxy for the hub.
+        var cardHubClient = jQuery.connection.cardHub;
+
+        document.getElementById("previousCard").onclick = function () {
+            previousCard();
+        };
+
+        document.getElementById("nextCard").onclick = function () {
+            nextCard();
+        };
+
+        cardHubClient.client.log = function (message) {
+            console.log(message);
+        }
+
+        cardHubClient.client.addCard = function (cardType, encryptedParameter) {
+            var cardArea = jQuery('#card');
+            var ajaxUrl = '@Url.Action("Index", "EncryptedCard")';
+            console.log("Requesting card html from " + ajaxUrl);
+            jQuery.ajax({
+                type: 'GET',
+                url: ajaxUrl,
+                cache: false,
+                data: {
+                    type: cardType,
+                    encrypted: encryptedParameter
+                },
+                success: function (response) {
+                    jQuery(cardArea).append(response);
+                    jumpToLatestCard();
+                }
+            });
+        }
+
+        cardHubClient.client.addTextCard = function (encryptedParameter) {
+            var cardArea = jQuery('#card');
+            jQuery.ajax({
+                type: 'GET',
+                url: '@Url.Action("Text", "EncryptedCard")',
+                cache: false,
+                data: {
+                    encrypted: encryptedParameter
+                },
+                success: function (response) {
+                    jQuery(cardArea).append(response);
+                    jumpToLatestCard();
+                }
+            });
+        }
+
+        console.log("Connecting to Hub...");
+        jQuery.connection.hub.start({ transport: 'longPolling' }).done(function () {
+            cardHubClient.server.joinHub('@(!Model.Key.IsEmpty() ? Model.Key : "public" )');
+            console.log('Now connected, connection ID = ' + jQuery.connection.hub.id);
+        });
+    });
+</script>
+
+<div id="card" class="card">
+    @Html.Action("List", "Card")
+    @Html.Action("Text", "Card")
+</div>
+<div id="previousCard" class="scroll leftscroll"></div>
+<div id="nextCard" class="scroll rightscroll"></div>
