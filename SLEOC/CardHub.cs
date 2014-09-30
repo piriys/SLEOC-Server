@@ -15,6 +15,8 @@ namespace SLEOC
 
         private readonly static Dictionary<string, string> _cardConnections =
                new Dictionary<string, string>();
+        private readonly static Dictionary<string, string> _teamConnections =
+               new Dictionary<string, string>();
 
         public override Task OnConnected()
         {
@@ -23,7 +25,8 @@ namespace SLEOC
 
         public override Task OnDisconnected(bool stopCalled)
         {
-             _cardConnections.Remove(Context.ConnectionId);
+            _cardConnections.Remove(Context.ConnectionId);
+            _teamConnections.Remove(Context.ConnectionId);
 
             return base.OnDisconnected(stopCalled);
         }
@@ -41,6 +44,29 @@ namespace SLEOC
             Clients.Caller.log("Current Card Connection Count: " + _cardConnections.Count);
             Clients.Others.log(Context.ConnectionId + " connected to group " + key);
             return Groups.Add(Context.ConnectionId, key);
+        }
+
+
+        [HubMethodName("joinTeam")]
+        public Task JoinTeam(string team)
+        {
+            try
+            {
+                string previousTeam = _teamConnections[Context.ConnectionId];
+                Groups.Remove(Context.ConnectionId, previousTeam);
+            }
+            catch
+            {
+
+            }
+
+            _teamConnections.Remove(Context.ConnectionId);
+            _teamConnections.Add(Context.ConnectionId, team);
+
+            Clients.Caller.log("Team Connected, team = " + team);
+            Clients.Caller.log("Current Team Connection Count: " + _teamConnections.Where(x => x.Value == team).Select(x => x.Key).ToList().Count);
+            Clients.Others.log(Context.ConnectionId + " connected to team " + team);
+            return Groups.Add(Context.ConnectionId, team.ToString());
         }
     }
 }

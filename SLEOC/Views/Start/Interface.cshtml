@@ -1,4 +1,5 @@
 ﻿@model SLEOC.Models.InterfaceModel
+@using SLEOC.Helpers
 
 @{
     ViewBag.Title = "Interface";
@@ -8,17 +9,45 @@
 <script src="@Url.Content("~/Scripts/jquery.signalR-2.1.2.js")"></script>
 <script src="~/signalr/hubs"></script>
 <script>
-    function jumpToCard(page) {
+    // Reference the auto-generated proxy for the hub.
+    var cardHubClient = jQuery.connection.cardHub;
+    var key = '@(!Model.Key.IsEmpty() ? Model.Key : "public" )';
+    var currentTeam = 4;
+    var currentTeamName = "EOC Management";
+
+    function goToCard(cardNumber) {
         var card = document.getElementById("card");
-        var left = page * 640;
+        var left = cardNumber * 640;
         left = 640 * Math.floor(left / 640);
         card.style.left = (left * -1) + "px";
         updateScrollButton();
     }
 
-    function jumpToLatestCard() {
+    function goToLatestCard() {
         var latestPage = jQuery("#card article").length - 1;
-        jumpToCard(latestPage);
+        goToCard(latestPage);
+    }
+
+    function updateTeamDisplay() {
+        var teamDisplay = jQuery("#currentTeam");
+        var teamColor = "yellow";
+
+        switch(currentTeam) {
+            case 1:
+                teamColor = "red";
+                break;
+            case 2:
+                teamColor = "blue";
+                break;
+            case 3:
+                teamColor = "green";
+                break;
+            default:
+                teamColor = "yellow";
+                break;
+        }
+
+        jQuery(teamDisplay).html("Current Team: <span class='" + teamColor + "'>" + currentTeamName + "</span>");
     }
 
     function updateScrollButton() {
@@ -32,23 +61,23 @@
 
         if (left == 0)
         {
-            console.log("Hiding left button")
+            console.log("Hiding left button");
             leftScroll.style.display = "none";
         }
         else
         {
-            console.log("Showing left button")
+            console.log("Showing left button");
             leftScroll.style.display = "block";
         }
 
         if (left > (count - 1) * -640)
         {
-            console.log("Showing right button")
+            console.log("Showing right button");
             rightScroll.style.display = "block";
         }
         else
         {
-            console.log("Hiding right button")
+            console.log("Hiding right button");
             rightScroll.style.display = "none";
         }
     }
@@ -81,13 +110,11 @@
         leftScroll.style.display = "none";
         rightScroll.style.display = "none";
         updateScrollButton();
+        updateTeamDisplay()
     }
 
     jQuery(function () {
         initialize();
-
-        // Reference the auto-generated proxy for the hub.
-        var cardHubClient = jQuery.connection.cardHub;
 
         document.getElementById("previousCard").onclick = function () {
             previousCard();
@@ -99,6 +126,19 @@
 
         cardHubClient.client.log = function (message) {
             console.log(message);
+        }
+
+        cardHubClient.client.goToCard = function (cardNumber) {
+            goToCard(cardNumber);
+        }
+
+        cardHubClient.client.joinTeam = function (team) {
+            updateTeamDisplay(team);
+        }
+
+        cardHubClient.client.receiveCard = function (data) {
+            var cardArea = jQuery('#card');
+            jQuery(cardArea).append(data);
         }
 
         cardHubClient.client.addCard = function (cardType, encryptedParameter) {
@@ -115,38 +155,79 @@
                 },
                 success: function (response) {
                     jQuery(cardArea).append(response);
-                    jumpToLatestCard();
+                    goToLatestCard();
                 }
             });
         }
 
-        cardHubClient.client.addTextCard = function (encryptedParameter) {
+        cardHubClient.client.setCard = function (cardType, encryptedParameter) {
             var cardArea = jQuery('#card');
+            var ajaxUrl = '@Url.Action("Index", "EncryptedCard")';
+            console.log("Requesting card html from " + ajaxUrl);
             jQuery.ajax({
                 type: 'GET',
-                url: '@Url.Action("Text", "EncryptedCard")',
+                url: ajaxUrl,
                 cache: false,
                 data: {
+                    type: cardType,
                     encrypted: encryptedParameter
                 },
                 success: function (response) {
-                    jQuery(cardArea).append(response);
-                    jumpToLatestCard();
+                    jQuery(cardArea).html(response);
+                    goToLatestCard();
                 }
             });
         }
 
         console.log("Connecting to Hub...");
         jQuery.connection.hub.start({ transport: 'longPolling' }).done(function () {
+            function joinTeam(team) {
+                currentTeam = team;
+                switch (team) {
+                    case 1:
+                        currentTeamName = "Planning";
+                        break;
+                    case 2:
+                        currentTeamName = "Operations";
+                        break;
+                    case 3:
+                        currentTeamName = "Logistics";
+                        break;
+                    default:
+                        currentTeamName = "EOC Management";
+                        break;
+                }
+
+                cardHubClient.server.joinTeam(team);
+                updateTeamDisplay();
+            }
+
+            document.getElementById("joinTeamOne").onclick = function () {
+                joinTeam(1);
+            };
+
+            document.getElementById("joinTeamTwo").onclick = function () {
+                joinTeam(2);
+            };
+
+            document.getElementById("joinTeamThree").onclick = function () {
+                joinTeam(3);
+            };
+
+            document.getElementById("joinTeamFour").onclick = function () {
+                joinTeam(4);
+            };
+
             cardHubClient.server.joinHub('@(!Model.Key.IsEmpty() ? Model.Key : "public" )');
+            cardHubClient.server.joinTeam(currentTeam);
             console.log('Now connected, connection ID = ' + jQuery.connection.hub.id);
         });
     });
 </script>
 
 <div id="card" class="card">
-    @Html.Action("List", "Card")
-    @Html.Action("Text", "Card")
+    @Html.Action("Start", "Card")
+    @Html.Action("Team", "Card")
 </div>
 <div id="previousCard" class="scroll leftscroll"></div>
 <div id="nextCard" class="scroll rightscroll"></div>

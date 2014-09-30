@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Team";
+}
+
+<script>
+    Card.init();
+</script>
+
+<article>
+    <section>
+        <table class="text-small">
+            <tbody>
+                <tr id="joinTeamOne" class="teambutton">
+                    <td class="red">
+                        <img src="@Url.Content("~/Content/images/group.svg")" class="icon-small svg">
+                        Join Team One <span class="muted">›</span> 
+                    </td>
+                    <td>
+                        <div class="text-minor align-right muted">Planning</div>
+                    </td>
+                </tr>
+                <tr id="joinTeamTwo" class="teambutton">
+                    <td class="blue">
+                        <img src="@Url.Content("~/Content/images/group.svg")" class="icon-small svg">
+                        Join Team Two <span class="muted">›</span>
+                    </td>
+                    <td>
+                        <div class="text-minor align-right muted">Operations</div>
+                    </td>
+                </tr>
+                <tr id="joinTeamThree" class="teambutton">
+                    <td class="green">
+                        <img src="@Url.Content("~/Content/images/group.svg")" class="icon-small svg">
+                        Join Team Three <span class="muted">›</span>
+                    </td>
+                    <td>
+                        <div class="text-minor align-right muted">Logistics</div>
+                    </td>
+                </tr>
+                <tr id="joinTeamFour" class="teambutton">
+                    <td class="yellow">
+                        <img src="@Url.Content("~/Content/images/group.svg")" class="icon-small">
+                        Join Team Four <span class="muted">›</span>
+                    </td>
+                    <td>
+                        <div class="text-minor align-right muted">EOC Management</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        @*<img src="https://mirror-api-playground.appspot.com/links/icons_30_0025_geo_transit.png" class="left">*@
+        <p id="currentTeam">Current Team: n/a</p>
+    </footer>
+</article>

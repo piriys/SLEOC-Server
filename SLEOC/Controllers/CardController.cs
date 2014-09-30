@@ -11,6 +11,37 @@ namespace SLEOC.Controllers
 {
     public class CardController : Controller
     {
+        public ActionResult Start()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Team()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Author(CardAuthorModel model)
+        {
+            if (String.IsNullOrEmpty(model.ImageURL))
+            {
+                model.ImageURL = Url.Content("~/Content/images/defaultimage.png");
+            }
+
+            if (String.IsNullOrEmpty(model.ProfileImageURL))
+            {
+                model.ProfileImageURL = Url.Content("~/Content/images/defaultprofileimage.png");
+            }
+
+            model.Name = HttpUtility.HtmlDecode(model.Name);
+            model.Location = HttpUtility.HtmlDecode(model.Location);
+            model.Description = HttpUtility.HtmlDecode(model.Description);
+            model.LeftFooter = HttpUtility.HtmlDecode(model.LeftFooter);
+            model.RightFooter = HttpUtility.HtmlDecode(model.RightFooter);
+
+            return PartialView(model);
+        }
+
         public ActionResult Text(CardTextModel model)
         {
             model.Title = HttpUtility.HtmlDecode(model.Title);

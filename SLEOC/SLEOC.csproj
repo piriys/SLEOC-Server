@@ -222,6 +222,7 @@
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Helpers\XOR.cs" />
     <Compile Include="CardHub.cs" />
+    <Compile Include="Models\CardAuthorModel.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardHybridMosaicModel.cs" />
     <Compile Include="Models\CardMosaicTextModel.cs" />
@@ -311,9 +312,13 @@
   <ItemGroup>
     <Content Include="Content\css\google_glass.css" />
     <Content Include="Content\css\google_glass_ui.css" />
+    <Content Include="Content\images\close.svg" />
     <Content Include="Content\images\defaultimage.png" />
+    <Content Include="Content\images\defaultprofileimage.png" />
+    <Content Include="Content\images\group.svg" />
     <Content Include="Content\images\navigate.next.svg" />
     <Content Include="Content\images\navigate.previous.svg" />
+    <Content Include="Content\images\upload.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -392,6 +397,7 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\google_glass_ui.js" />
+    <Content Include="Scripts\svg_converter.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -448,6 +454,10 @@
     <Content Include="Views\Card\MosaicText.cshtml" />
     <Content Include="Views\EncryptedCard\MosaicText.cshtml" />
     <Content Include="Views\Start\Interface.cshtml" />
+    <Content Include="Views\Card\Author.cshtml" />
+    <Content Include="Views\EncryptedCard\Author.cshtml" />
+    <Content Include="Views\Card\Team.cshtml" />
+    <Content Include="Views\Card\Start.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

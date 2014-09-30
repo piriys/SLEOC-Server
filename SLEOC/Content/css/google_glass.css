@@ -479,28 +479,61 @@ footer [class^="layout-"] > div {
   color: #c33;
 }
 
+.red svg path{
+    fill: #c33;
+}
+
 .yellow {
   color: #db1;
+}
+
+.yellow svg path{
+    fill: #db1;
 }
 
 .green {
   color: #9c3;
 }
 
+.green svg path{
+    fill: #9c3;
+}
+
 .blue {
   color: #34a7ff;
+}
+
+.blue svg path{
+    fill: #34a7ff;
 }
 
 .white {
   color: #fff;
 }
 
+.white svg path{
+    fill: #fff;
+}
+
 .gray {
   color: #808080;
 }
 
+.gray svg path{
+    fill: #808080;
+}
+
 .muted {
   color: #808080;
+}
+
+.muted svg path{
+    fill: #808080;
+}
+
+svg.icon-small {
+    width: 30px;
+    height: 30px;
 }
 
 

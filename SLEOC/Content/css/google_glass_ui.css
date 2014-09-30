@@ -70,15 +70,51 @@ body.small {
     border-color: #3072E1;
 }
 
-.scroll {
+.topbutton {
     cursor: pointer;
-    height: 360px;
+    height: 40px;
     width: 40px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
     position: absolute;
-    opacity: 0;
+    opacity: 0.15;
+    top: 0px;
+    right: 40px;
+    transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -ms-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    z-index: 150;
+}
+
+.send 
+{
+    right: 80px;
+    background-image: url('../images/upload.svg');
+}
+
+.close
+{
+    right: 40px;
+    background-image: url('../images/close.svg');
+}
+
+.topbutton:hover
+{
+    opacity: 0.7;
+}
+
+.scroll {
+    cursor: pointer;
+    height: 360px;
+    width: 40px;
+    position: absolute;
+    opacity: 0.15;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
     transition: opacity 0.4s ease-in-out;
     -moz-transition: opacity 0.4s ease-in-out;
     -ms-transition: opacity 0.4s ease-in-out;
@@ -87,7 +123,22 @@ body.small {
     z-index: 100;
 }
 
-body:hover .scroll {
+.teambutton {
+    cursor: pointer;
+    opacity: 1.0;
+    transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -ms-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    z-index: 100;
+}
+
+.teambutton:hover {
+    opacity: 0.5;
+}
+
+.scroll:hover {
     opacity: 0.7;
 }
 
