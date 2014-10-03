@@ -78,7 +78,7 @@ body.small {
     background-position: center;
     background-size: 100%;
     position: absolute;
-    opacity: 0.15;
+    opacity: 0.5;
     top: 0px;
     right: 40px;
     transition: opacity 0.4s ease-in-out;
@@ -111,7 +111,7 @@ body.small {
     height: 360px;
     width: 40px;
     position: absolute;
-    opacity: 0.15;
+    opacity: 0.5;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -139,7 +139,7 @@ body.small {
 }
 
 .scroll:hover {
-    opacity: 0.7;
+    opacity: 1.0;
 }
 
 .leftscroll {

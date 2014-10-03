@@ -18,9 +18,9 @@ namespace SLEOC
         private readonly static Dictionary<string, string> _teamConnections =
                new Dictionary<string, string>();
 
-        public override Task OnConnected()
+        public async override Task OnConnected()
         {
-            return base.OnConnected();
+            await base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -37,13 +37,13 @@ namespace SLEOC
         }
 
         [HubMethodName("joinHub")]
-        public Task JoinHub(string key)
+        public async Task JoinHub(string key)
         {
             _cardConnections.Add(Context.ConnectionId, key);
             Clients.Caller.log("Hub Connected, key = " + key);
             Clients.Caller.log("Current Card Connection Count: " + _cardConnections.Count);
-            Clients.Others.log(Context.ConnectionId + " connected with key " + key);
-            return Clients.Caller.log("Card sent");
+            Clients.Others.log(Context.ConnectionId + " connected with name " + key);
+            await Groups.Add(Context.ConnectionId, key);
         }
 
         [HubMethodName("sendCard")]
@@ -60,6 +60,11 @@ namespace SLEOC
                 {
                     Clients.Client(connection).receiveCard(data);
                     Clients.Client(connection).log("Card recieved from " + Context.ConnectionId);
+                    Clients.Caller.log("Sending card to " + connection);
+                }
+                else
+                {
+                    Clients.Caller.log("Skipping " + connection);
                 }
             }
 
@@ -67,21 +72,28 @@ namespace SLEOC
         }
 
         [HubMethodName("joinTeam")]
-        public Task JoinTeam(string team)
+        public async Task JoinTeam(string team)
         {
+            Clients.Caller.toggleJoinTeam(false);
+
             if (_teamConnections.ContainsKey(Context.ConnectionId))
             {
                 string previousTeam = _teamConnections[Context.ConnectionId];
-                Groups.Remove(Context.ConnectionId, previousTeam);
+                
+                await Groups.Remove(Context.ConnectionId, previousTeam);
                 _teamConnections.Remove(Context.ConnectionId);
+                Clients.Caller.log("Leaving team " + previousTeam);
             }
-
+            
             _teamConnections.Add(Context.ConnectionId, team);
 
             Clients.Caller.log("Team Connected, team = " + team);
             Clients.Caller.log("Current Team Connection Count: " + _teamConnections.Where(x => x.Value == team).Select(x => x.Key).ToList().Count);
             Clients.Others.log(Context.ConnectionId + " connected to team " + team);
-            return Groups.Add(Context.ConnectionId, team.ToString());
+            Clients.Caller.toggleJoinTeam(true);
+            Clients.Caller.updateTeamDisplay();
+            
+            await Groups.Add(Context.ConnectionId, team.ToString());
         }
     }
 }
