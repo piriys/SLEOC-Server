@@ -42,25 +42,40 @@ namespace SLEOC
             _cardConnections.Add(Context.ConnectionId, key);
             Clients.Caller.log("Hub Connected, key = " + key);
             Clients.Caller.log("Current Card Connection Count: " + _cardConnections.Count);
-            Clients.Others.log(Context.ConnectionId + " connected to group " + key);
-            return Groups.Add(Context.ConnectionId, key);
+            Clients.Others.log(Context.ConnectionId + " connected with key " + key);
+            return Clients.Caller.log("Card sent");
         }
 
+        [HubMethodName("sendCard")]
+        public Task SendCard(string encrypted, string team)
+        {
+            var connections = _teamConnections.Where(x => x.Value == team).Select(x => x.Key).ToList();
+
+            encrypted = Helpers.XOR.Decrypt(encrypted, Helpers.Constants.XORAppKey);
+            string data = HttpUtility.UrlDecode(encrypted);
+
+            foreach (string connection in connections)
+            {
+                if (connection != Context.ConnectionId)
+                {
+                    Clients.Client(connection).receiveCard(data);
+                    Clients.Client(connection).log("Card recieved from " + Context.ConnectionId);
+                }
+            }
+
+            return Clients.Caller.log("Card sent");
+        }
 
         [HubMethodName("joinTeam")]
         public Task JoinTeam(string team)
         {
-            try
+            if (_teamConnections.ContainsKey(Context.ConnectionId))
             {
                 string previousTeam = _teamConnections[Context.ConnectionId];
                 Groups.Remove(Context.ConnectionId, previousTeam);
-            }
-            catch
-            {
-
+                _teamConnections.Remove(Context.ConnectionId);
             }
 
-            _teamConnections.Remove(Context.ConnectionId);
             _teamConnections.Add(Context.ConnectionId, team);
 
             Clients.Caller.log("Team Connected, team = " + team);

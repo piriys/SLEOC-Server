@@ -213,6 +213,7 @@
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\EncryptedCardController.cs" />
+    <Compile Include="Controllers\HelperApiController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -230,6 +231,7 @@
     <Compile Include="Models\CardHybridModel.cs" />
     <Compile Include="Models\CardListModel.cs" />
     <Compile Include="Models\CardMosaicListModel.cs" />
+    <Compile Include="Models\CardVideoModel.cs" />
     <Compile Include="Models\InterfaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SLEOCEntityModel.Context.cs">

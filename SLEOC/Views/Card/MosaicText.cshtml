@@ -9,24 +9,6 @@
 <link href="@Url.Content("~/Content/css/google_glass.css")" rel="stylesheet" />
 <link href="@Url.Content("~/Content/css/google_glass_ui.css")" rel="stylesheet" />
 
-<script>
-    Card.init();
-    jQuery("article .close").click(function () {
-        jQuery(this).parent().remove();
-        var cards = jQuery("article");
-        var count = cards.length;
-
-        for (var i = 0; i < count; i++) {
-            cards.get(i).style.left = (640 * i) + "px";
-        }
-
-        goToCard(1);
-    });
-</script>
-
-
-
-
     <article>
         <div class="topbutton send"></div>
         <div class="topbutton close"></div>

@@ -113,6 +113,7 @@
         updateTeamDisplay()
     }
 
+
     jQuery(function () {
         initialize();
 
@@ -136,49 +137,6 @@
             updateTeamDisplay(team);
         }
 
-        cardHubClient.client.receiveCard = function (data) {
-            var cardArea = jQuery('#card');
-            jQuery(cardArea).append(data);
-        }
-
-        cardHubClient.client.addCard = function (cardType, encryptedParameter) {
-            var cardArea = jQuery('#card');
-            var ajaxUrl = '@Url.Action("Index", "EncryptedCard")';
-            console.log("Requesting card html from " + ajaxUrl);
-            jQuery.ajax({
-                type: 'GET',
-                url: ajaxUrl,
-                cache: false,
-                data: {
-                    type: cardType,
-                    encrypted: encryptedParameter
-                },
-                success: function (response) {
-                    jQuery(cardArea).append(response);
-                    goToLatestCard();
-                }
-            });
-        }
-
-        cardHubClient.client.setCard = function (cardType, encryptedParameter) {
-            var cardArea = jQuery('#card');
-            var ajaxUrl = '@Url.Action("Index", "EncryptedCard")';
-            console.log("Requesting card html from " + ajaxUrl);
-            jQuery.ajax({
-                type: 'GET',
-                url: ajaxUrl,
-                cache: false,
-                data: {
-                    type: cardType,
-                    encrypted: encryptedParameter
-                },
-                success: function (response) {
-                    jQuery(cardArea).html(response);
-                    goToLatestCard();
-                }
-            });
-        }
-
         console.log("Connecting to Hub...");
         jQuery.connection.hub.start({ transport: 'longPolling' }).done(function () {
             function joinTeam(team) {
@@ -198,29 +156,93 @@
                         break;
                 }
 
-                cardHubClient.server.joinTeam(team);
+                cardHubClient.server.joinTeam(currentTeam);
                 updateTeamDisplay();
             }
 
-            document.getElementById("joinTeamOne").onclick = function () {
+            function attachCardToEvent() {
+                jQuery("article .close").click(function () {
+                    jQuery(this).parent().remove();
+                    var cards = jQuery("article");
+                    var count = cards.length;
+
+                    for (var i = 0; i < count; i++) {
+                        cards.get(i).style.left = (640 * i) + "px";
+                    }
+
+                    goToCard(1);
+                });
+
+                jQuery("article .send").click(function () {
+                    console.log("Pre-Encoded Data: " + jQuery(this).parent().html());
+                    var sharedCard = jQuery(this).parent().clone().wrap('<div>').parent().html();
+                    var helpersUrl = '@Url.Action("Encrypt", "HelperApi", new { httproute = "" })';
+                    jQuery.ajax({
+                        type: 'GET',
+                        url: helpersUrl,
+                        cache: false,
+                        data: {
+                            text: encodeURIComponent(sharedCard)
+                        },
+                        success: function (response) {
+                            console.log("Card Data Sent: " + response);
+                            cardHubClient.server.sendCard(response, currentTeam);
+                        }
+                    });
+                });
+            }
+
+            cardHubClient.client.receiveCard = function (data) {
+                console.log("Recieving Card Data: " + data);
+                var cardArea = jQuery('#card');
+                jQuery(cardArea).append(data);
+                Card.init();
+                goToLatestCard();
+                attachCardToEvent();
+            }
+
+            cardHubClient.client.addCard = function (cardType, encryptedParameter) {
+                var cardArea = jQuery('#card');
+                var ajaxUrl = '@Url.Action("Index", "EncryptedCard")';
+                console.log("Requesting card html from " + ajaxUrl);
+                jQuery.ajax({
+                    type: 'GET',
+                    url: ajaxUrl,
+                    cache: false,
+                    data: {
+                        type: cardType,
+                        encrypted: encryptedParameter
+                    },
+                    success: function (response) {
+                        jQuery(cardArea).append(response);
+                        Card.init();
+                        goToLatestCard();
+                        attachCardToEvent();
+                    }
+                });
+            }
+
+            jQuery("#joinTeamOne").click(function () {
                 joinTeam(1);
-            };
+            });
 
-            document.getElementById("joinTeamTwo").onclick = function () {
+            jQuery("#joinTeamTwo").click(function () {
                 joinTeam(2);
-            };
+            });
 
-            document.getElementById("joinTeamThree").onclick = function () {
+            jQuery("#joinTeamThree").click(function () {
                 joinTeam(3);
-            };
+            });
 
-            document.getElementById("joinTeamFour").onclick = function () {
+            jQuery("#joinTeamFour").click(function () {
                 joinTeam(4);
-            };
+            });
 
             cardHubClient.server.joinHub('@(!Model.Key.IsEmpty() ? Model.Key : "public" )');
             cardHubClient.server.joinTeam(currentTeam);
             console.log('Now connected, connection ID = ' + jQuery.connection.hub.id);
+        }).fail(function(error) {
+            console.log('Invocation of start failed. Error: ' + error);
         });
     });
 </script>
