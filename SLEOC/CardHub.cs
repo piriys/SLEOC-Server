@@ -25,8 +25,11 @@ namespace SLEOC
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            _cardConnections.Remove(Context.ConnectionId);
-            _teamConnections.Remove(Context.ConnectionId);
+            if (stopCalled)
+            {
+                _cardConnections.Remove(Context.ConnectionId);
+                _teamConnections.Remove(Context.ConnectionId);
+            }
 
             return base.OnDisconnected(stopCalled);
         }

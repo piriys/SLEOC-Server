@@ -460,6 +460,8 @@
     <Content Include="Views\EncryptedCard\Author.cshtml" />
     <Content Include="Views\Card\Team.cshtml" />
     <Content Include="Views\Card\Start.cshtml" />
+    <Content Include="Views\Card\Video.cshtml" />
+    <Content Include="Views\EncryptedCard\Video.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

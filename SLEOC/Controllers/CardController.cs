@@ -21,6 +21,11 @@ namespace SLEOC.Controllers
             return PartialView();
         }
 
+        public ActionResult Video(CardVideoModel model)
+        {
+            return PartialView(model);
+        }
+
         public ActionResult Author(CardAuthorModel model)
         {
             if (String.IsNullOrEmpty(model.ImageURL))
