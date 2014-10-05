@@ -6,28 +6,30 @@
 }
 
 <!--SignalR-->
-<script src="@Url.Content("~/Scripts/jquery.signalR-2.1.2.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.signalR-2.0.3.js")"></script>
 <script src="~/signalr/hubs"></script>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_Y57vIWV9mDVfzM1Y0EJcE9VeWbHyggU"></script>
 <script>
-    // Reference the auto-generated proxy for the hub.
-    var key = '@(!Model.Key.IsEmpty() ? Model.Key : "public" )';
+        // Reference the auto-generated proxy for the hub.
+        var key = '@(!Model.Key.IsEmpty() ? Model.Key : "public" )';
     var currentTeam = 0;
     var currentTeamName = "n/a";
     var enableJoinTeam = false;
     var cardHubClient = jQuery.connection.cardHub;
 
-    jQuery.connection.hub.disconnected(function () {
-        toggleJoinTeam(false);
-        console.log("Disconnected from SignalR");
-    });
+    //jQuery.connection.hub.disconnected(function () {
+    //    toggleJoinTeam(false);
+    //    console.log("Disconnected from SignalR");
+    //});
 
-    jQuery.connection.hub.reconnected(function () {
-        console.log("Reconnecting to SignalR");
-    });
+    //jQuery.connection.hub.reconnected(function () {
+    //    console.log("Reconnecting to SignalR");
+    //});
 
-    jQuery.connection.hub.connectionSlow(function () {
-        console.log("Connection slow");
-    });
+    //jQuery.connection.hub.connectionSlow(function () {
+    //    console.log("Connection slow");
+    //});
 
     function goToCard(cardNumber) {
         var card = document.getElementById("card");
@@ -127,7 +129,6 @@
         leftScroll.style.display = "none";
         rightScroll.style.display = "none";
         updateScrollButton();
-        jQuery.connection.hub.logging = true;
     }
 
     function toggleJoinTeam(toggle)
@@ -176,8 +177,90 @@
         });
     }
 
+    function addTeamMenu() {
+        var cardArea = jQuery('#card');
+        var ajaxUrl = '@Url.Action("Team", "Card")';
+        jQuery.ajax({
+            type: 'GET',
+            url: ajaxUrl,
+            cache: false,
+            data: {
+
+            },
+            success: function (response) {
+                jQuery(cardArea).append(response);
+                Card.init();
+                goToLatestCard();
+
+                jQuery("#joinTeamOne").click(function () {
+                    joinTeam(1);
+                });
+
+                jQuery("#joinTeamTwo").click(function () {
+                    joinTeam(2);
+                });
+
+                jQuery("#joinTeamThree").click(function () {
+                    joinTeam(3);
+                });
+
+                jQuery("#joinTeamFour").click(function () {
+                    joinTeam(4);
+                });
+            }
+        });
+    }
+
+    function addCard(cardType, encryptedParameter) {
+        var cardArea = jQuery('#card');
+        var ajaxUrl = '@Url.Action("Index", "EncryptedCard")';
+        console.log("Requesting card html from " + ajaxUrl);
+        jQuery.ajax({
+            type: 'GET',
+            url: ajaxUrl,
+            cache: false,
+            data: {
+                type: cardType,
+                encrypted: encryptedParameter
+            },
+            success: function (response) {
+                jQuery(cardArea).append(response);
+                Card.init();
+                goToLatestCard();
+                attachCardToEvent();
+            }
+        });
+    }
+
+    function joinTeam(team) {
+        if (enableJoinTeam) {
+            currentTeam = team;
+            switch (team) {
+                case 1:
+                    currentTeamName = "Planning";
+                    break;
+                case 2:
+                    currentTeamName = "Operations";
+                    break;
+                case 3:
+                    currentTeamName = "Logistics";
+                    break;
+                case 4:
+                    currentTeamName = "EOC Management";
+                    break;
+                default:
+                    currentTeamName = "Unknown"
+                    break;
+            }
+
+            cardHubClient.server.joinTeam(currentTeamName);
+        }
+        else {
+            console.log("Please wait to join team");
+        }
+    }
+
     jQuery(function () {
-        jQuery.connection.hub.transportConnectTimeout = 10000;
         initialize();
 
         document.getElementById("previousCard").onclick = function () {
@@ -214,77 +297,19 @@
         }
 
         cardHubClient.client.addCard = function (cardType, encryptedParameter) {
-            var cardArea = jQuery('#card');
-            var ajaxUrl = '@Url.Action("Index", "EncryptedCard")';
-            console.log("Requesting card html from " + ajaxUrl);
-            jQuery.ajax({
-                type: 'GET',
-                url: ajaxUrl,
-                cache: false,
-                data: {
-                    type: cardType,
-                    encrypted: encryptedParameter
-                },
-                success: function (response) {
-                    jQuery(cardArea).append(response);
-                    Card.init();
-                    goToLatestCard();
-                    attachCardToEvent();
-                }
-            });
+            addCard(cardType, encryptedParameter);
         }
 
         console.log("Connecting to Hub...");
-        jQuery.connection.hub.start({ transport: 'auto' }).done(function () {
-            function joinTeam(team) {
-                if (enableJoinTeam) {
-                    currentTeam = team;
-                    switch (team) {
-                        case 1:
-                            currentTeamName = "Planning";
-                            break;
-                        case 2:
-                            currentTeamName = "Operations";
-                            break;
-                        case 3:
-                            currentTeamName = "Logistics";
-                            break;
-                        case 4:
-                            currentTeamName = "EOC Management";
-                            break;
-                        default:
-                            currentTeamName = "Unknown"
-                            break;  
-                    }
-
-                    cardHubClient.server.joinTeam(currentTeamName);
-                }
-                else
-                {
-                    console.log("Please wait to join team");
-                }
-            }
-
-            jQuery("#joinTeamOne").click(function () {
-                joinTeam(1);
-            });
-
-            jQuery("#joinTeamTwo").click(function () {
-                joinTeam(2);
-            });
-
-            jQuery("#joinTeamThree").click(function () {
-                joinTeam(3);
-            });
-
-            jQuery("#joinTeamFour").click(function () {
-                joinTeam(4);
-            });
+        jQuery.connection.hub.start({ transport: "longPolling" }).done(function () {
+            jQuery.connection.hub.logging = true;
+            jQuery.connection.hub.transportConnectTimeout = 10000;
+            addTeamMenu();
 
             console.log('Now connected, connection ID = ' + jQuery.connection.hub.id);
             toggleJoinTeam(true);
             cardHubClient.server.joinHub('@(!Model.Key.IsEmpty() ? Model.Key : "public" )');
-            @*cardHubClient.server.joinTeam(currentTeamName);*@
+            //cardHubClient.server.joinTeam(currentTeamName);
 
         }).fail(function(error) {
             console.log('Invocation of start failed. Error: ' + error);
@@ -294,7 +319,6 @@
 
 <div id="card" class="card">
     @Html.Action("Start", "Card")
-    @Html.Action("Team", "Card")
 </div>
 <div id="previousCard" class="scroll leftscroll"></div>
 <div id="nextCard" class="scroll rightscroll"></div>

@@ -16,7 +16,7 @@ namespace SLEOC.Controllers
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<CardHub>();
             hubContext.Clients.Group(key).addCard(type, encrypted);
             hubContext.Clients.Group(key).log(type + " Card added");
-            return Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.Accepted);
         }
     }
 }

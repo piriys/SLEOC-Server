@@ -92,7 +92,7 @@ body.small {
 .send 
 {
     right: 80px;
-    background-image: url('../images/upload.svg');
+    background-image: url('../images/share.svg');
 }
 
 .close

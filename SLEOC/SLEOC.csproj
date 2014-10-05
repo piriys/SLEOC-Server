@@ -52,14 +52,16 @@
     <Reference Include="Microsoft.AspNet.SignalR.Owin">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Owin.1.2.2\lib\net45\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.0.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.2.0.2\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security">
@@ -232,6 +234,8 @@
     <Compile Include="Models\CardListModel.cs" />
     <Compile Include="Models\CardMosaicListModel.cs" />
     <Compile Include="Models\CardVideoModel.cs" />
+    <Compile Include="Models\DecryptInputModel.cs" />
+    <Compile Include="Models\EncryptInputModel.cs" />
     <Compile Include="Models\InterfaceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SLEOCEntityModel.Context.cs">
@@ -320,6 +324,7 @@
     <Content Include="Content\images\group.svg" />
     <Content Include="Content\images\navigate.next.svg" />
     <Content Include="Content\images\navigate.previous.svg" />
+    <Content Include="Content\images\share.svg" />
     <Content Include="Content\images\upload.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -387,8 +392,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
-    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.0.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.0.3.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

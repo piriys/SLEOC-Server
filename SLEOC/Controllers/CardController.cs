@@ -23,6 +23,10 @@ namespace SLEOC.Controllers
 
         public ActionResult Video(CardVideoModel model)
         {
+            model.Video = HttpUtility.HtmlDecode(model.Video);
+            model.LeftFooter = HttpUtility.HtmlDecode(model.LeftFooter);
+            model.RightFooter = HttpUtility.HtmlDecode(model.RightFooter);
+
             return PartialView(model);
         }
 

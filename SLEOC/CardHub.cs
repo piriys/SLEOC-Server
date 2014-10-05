@@ -18,39 +18,27 @@ namespace SLEOC
         private readonly static Dictionary<string, string> _teamConnections =
                new Dictionary<string, string>();
 
-        public async override Task OnConnected()
+        public override Task OnDisconnected(bool stopCalling)
         {
-            await base.OnConnected();
-        }
-
-        public override Task OnDisconnected(bool stopCalled)
-        {
-            if (stopCalled)
-            {
-                _cardConnections.Remove(Context.ConnectionId);
-                _teamConnections.Remove(Context.ConnectionId);
-            }
-
-            return base.OnDisconnected(stopCalled);
-        }
-
-        public override Task OnReconnected()
-        {
-            return base.OnReconnected();
+            _cardConnections.Remove(Context.ConnectionId);
+            _teamConnections.Remove(Context.ConnectionId);
+            return Clients.Others.log(Context.ConnectionId + " disconnected");
         }
 
         [HubMethodName("joinHub")]
-        public async Task JoinHub(string key)
+        public void JoinHub(string key)
         {
             _cardConnections.Add(Context.ConnectionId, key);
             Clients.Caller.log("Hub Connected, key = " + key);
             Clients.Caller.log("Current Card Connection Count: " + _cardConnections.Count);
             Clients.Others.log(Context.ConnectionId + " connected with name " + key);
-            await Groups.Add(Context.ConnectionId, key);
+            Clients.Caller.log("Current Card Connection Count: " + _cardConnections.Count);
+
+            Groups.Add(Context.ConnectionId, key);
         }
 
         [HubMethodName("sendCard")]
-        public Task SendCard(string encrypted, string team)
+        public void SendCard(string encrypted, string team)
         {
             var connections = _teamConnections.Where(x => x.Value == team).Select(x => x.Key).ToList();
 
@@ -71,11 +59,11 @@ namespace SLEOC
                 }
             }
 
-            return Clients.Caller.log("Card sent");
+            Clients.Caller.log("Card sent");
         }
 
         [HubMethodName("joinTeam")]
-        public async Task JoinTeam(string team)
+        public void JoinTeam(string team)
         {
             Clients.Caller.toggleJoinTeam(false);
 
@@ -83,7 +71,7 @@ namespace SLEOC
             {
                 string previousTeam = _teamConnections[Context.ConnectionId];
                 
-                await Groups.Remove(Context.ConnectionId, previousTeam);
+                Groups.Remove(Context.ConnectionId, previousTeam);
                 _teamConnections.Remove(Context.ConnectionId);
                 Clients.Caller.log("Leaving team " + previousTeam);
             }
@@ -96,7 +84,7 @@ namespace SLEOC
             Clients.Caller.toggleJoinTeam(true);
             Clients.Caller.updateTeamDisplay();
             
-            await Groups.Add(Context.ConnectionId, team.ToString());
+            Groups.Add(Context.ConnectionId, team.ToString());
         }
     }
 }
