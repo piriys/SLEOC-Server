@@ -146,6 +146,10 @@
     }
 
     function attachCardToEvent() {
+        jQuery("article .team").click(function () {
+            goToCard(1);
+        });
+
         jQuery("article .close").click(function () {
             jQuery(this).parent().remove();
             var cards = jQuery("article");

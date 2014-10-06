@@ -91,8 +91,14 @@ body.small {
 
 .send 
 {
-    right: 80px;
+    right: 120px;
     background-image: url('../images/share.svg');
+}
+
+.team
+{
+    right: 80px;
+    background-image: url('../images/group.svg');
 }
 
 .close
