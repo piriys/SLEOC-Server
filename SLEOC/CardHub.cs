@@ -38,18 +38,15 @@ namespace SLEOC
         }
 
         [HubMethodName("sendCard")]
-        public void SendCard(string encrypted, string team)
+        public void SendCard(string type, string encrypted, string team)
         {
             var connections = _teamConnections.Where(x => x.Value == team).Select(x => x.Key).ToList();
-
-            encrypted = Helpers.XOR.Decrypt(encrypted, Helpers.Constants.XORAppKey);
-            string data = HttpUtility.UrlDecode(encrypted);
 
             foreach (string connection in connections)
             {
                 if (connection != Context.ConnectionId)
                 {
-                    Clients.Client(connection).receiveCard(data);
+                    Clients.Client(connection).AddCard(type, encrypted);
                     Clients.Client(connection).log("Card recieved from " + Context.ConnectionId);
                     Clients.Caller.log("Sending card to " + connection);
                 }

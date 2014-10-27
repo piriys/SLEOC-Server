@@ -21,6 +21,12 @@ namespace SLEOC.Controllers
             return PartialView();
         }
 
+        public ActionResult Map()
+        {
+            ViewBag.MapID = System.Guid.NewGuid().ToString();
+            return View();
+        }
+
         public ActionResult Video(CardVideoModel model)
         {
             model.Video = HttpUtility.HtmlDecode(model.Video);

@@ -388,7 +388,6 @@ sub {
 .text-auto-size {
   width: 100%;
   height: 100%;
-  visibility: hidden;
 }
 
 /* Forces text onto a single line, ellipsized at the end. */
@@ -634,11 +633,17 @@ article.photo .text-x-small {
 }
 
 article.photo section img.left {
-  margin-right: 10px;
+  margin-right: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
 }
 
 article.photo section img.right {
-  margin-left: 10px;
+  margin-left: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
 }
 
 /*--------------------------------------- */

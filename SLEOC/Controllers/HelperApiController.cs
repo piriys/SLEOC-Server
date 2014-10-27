@@ -10,13 +10,13 @@ namespace SLEOC.Controllers
 {
     public class HelperApiController : ApiController
     {
-        [HttpGet]
+        [HttpPost]
         public string Encrypt (string text)
         {
             return Helpers.XOR.Encrypt(text, Helpers.Constants.XORAppKey);
         }
 
-        [HttpGet]
+        [HttpPost]
         public string Decrypt(string text)
         {
             return Helpers.XOR.Decrypt(text, Helpers.Constants.XORAppKey);

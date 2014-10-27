@@ -8,28 +8,14 @@
 <!--SignalR-->
 <script src="@Url.Content("~/Scripts/jquery.signalR-2.0.3.js")"></script>
 <script src="~/signalr/hubs"></script>
-<script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_Y57vIWV9mDVfzM1Y0EJcE9VeWbHyggU"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_Y57vIWV9mDVfzM1Y0EJcE9VeWbHyggU"></script>
 <script>
-        // Reference the auto-generated proxy for the hub.
-        var key = '@(!Model.Key.IsEmpty() ? Model.Key : "public" )';
+    // Reference the auto-generated proxy for the hub.
+    var key = '@(!Model.Key.IsEmpty() ? Model.Key : "public" )';
     var currentTeam = 0;
     var currentTeamName = "n/a";
     var enableJoinTeam = false;
     var cardHubClient = jQuery.connection.cardHub;
-
-    //jQuery.connection.hub.disconnected(function () {
-    //    toggleJoinTeam(false);
-    //    console.log("Disconnected from SignalR");
-    //});
-
-    //jQuery.connection.hub.reconnected(function () {
-    //    console.log("Reconnecting to SignalR");
-    //});
-
-    //jQuery.connection.hub.connectionSlow(function () {
-    //    console.log("Connection slow");
-    //});
 
     function goToCard(cardNumber) {
         var card = document.getElementById("card");
@@ -163,21 +149,10 @@
         });
 
         jQuery("article .send").click(function () {
-            console.log("Pre-Encoded Data: " + jQuery(this).parent().html());
-            var sharedCard = jQuery(this).parent().clone().wrap('<div>').parent().html();
-            var helpersUrl = '@Url.Action("Encrypt", "HelperApi", new { httproute = "" })';
-            jQuery.ajax({
-                type: 'GET',
-                url: helpersUrl,
-                cache: false,
-                data: {
-                    text: encodeURIComponent(sharedCard)
-                },
-                success: function (response) {
-                    console.log("Card Data Sent: " + response);
-                    cardHubClient.server.sendCard(response, currentTeamName);
-                }
-            });
+            var encrypted = jQuery(this).parent().data("encrypted");
+            var type = jQuery(this).parent().data("type");
+            console.log("Encrypted: " + encrypted);
+            cardHubClient.server.sendCard(type, encrypted, currentTeamName);
         });
     }
 
@@ -291,15 +266,6 @@
             toggleJoinTeam(toggle);
         }
 
-        cardHubClient.client.receiveCard = function (data) {
-            console.log("Recieving Card Data: " + data);
-            var cardArea = jQuery('#card');
-            jQuery(cardArea).append(data);
-            Card.init();
-            goToLatestCard();
-            attachCardToEvent();
-        }
-
         cardHubClient.client.addCard = function (cardType, encryptedParameter) {
             addCard(cardType, encryptedParameter);
         }
@@ -315,8 +281,9 @@
             cardHubClient.server.joinHub('@(!Model.Key.IsEmpty() ? Model.Key : "public" )');
             //cardHubClient.server.joinTeam(currentTeamName);
 
-        }).fail(function(error) {
-            console.log('Invocation of start failed. Error: ' + error);
+        });
+        jQuery.connection.hub.error(function(error) {
+            console.log('SignalR error: ' + error);
         });
     });
 </script>

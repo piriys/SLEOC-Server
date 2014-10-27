@@ -216,6 +216,7 @@
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\EncryptedCardController.cs" />
     <Compile Include="Controllers\HelperApiController.cs" />
+    <Compile Include="Controllers\HelperController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -223,6 +224,7 @@
     <Compile Include="Helpers\CardHelpers.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
+    <Compile Include="Helpers\SLHelpers.cs" />
     <Compile Include="Helpers\XOR.cs" />
     <Compile Include="CardHub.cs" />
     <Compile Include="Models\CardAuthorModel.cs" />
@@ -386,6 +388,8 @@
     <None Include="Properties\PublishProfiles\crimsondash.com - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\google_glass.js" />
+    <Content Include="Scripts\heatmap.js" />
+    <Content Include="Scripts\heatmap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -467,6 +471,7 @@
     <Content Include="Views\Card\Start.cshtml" />
     <Content Include="Views\Card\Video.cshtml" />
     <Content Include="Views\EncryptedCard\Video.cshtml" />
+    <Content Include="Views\Card\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
