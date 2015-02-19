@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Map";
+}
+
+<!--Google Glass-->
+<link href="//fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,500,500italic,300,300italic,100,100italic" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/css/google_glass.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/css/google_glass_ui.css")" rel="stylesheet" />
+
+<script>
+    document.ready = function () {
+        function addDataPoint(newX, newY, newValue)
+        {
+            dataPoint = {
+                x: newX, // x coordinate of the datapoint, a number 
+                y: newY, // y coordinate of the datapoint, a number
+                value: newValue // the value at datapoint(x, y)
+            };
+
+            heatmapInstance.addData(dataPoint);
+        }
+
+        var config = {
+            container: document.getElementById('@ViewBag.MapID'),
+            radius: 45,
+            maxOpacity: .75,
+            minOpacity: .1,
+            blur: 1,
+        };
+
+        var heatmapInstance = h337.create(config);
+
+        addDataPoint(320, 160, 80);
+        addDataPoint(300, 160, 60);
+        addDataPoint(340, 160, 60);
+        addDataPoint(360, 160, 40);
+        addDataPoint(380, 160, 30);
+        addDataPoint(400, 160, 20);
+        addDataPoint(400, 160, 10);
+
+        addDataPoint(320, 180, 30);
+        addDataPoint(320, 140, 30);
+    }
+</script>
+
+<article id="@ViewBag.MapID" class="photo">
+    <div class="topbutton send"></div>
+    <div class="topbutton team"></div>
+    <div class="topbutton close"></div>
+    <img src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyD_Y57vIWV9mDVfzM1Y0EJcE9VeWbHyggU&center=Brooklyn+Bridge,New+York&size=640x360&zoom=10" width="100%" height="100%">
+    <div class="overlay-gradient-tall-dark" />
+
+    @*<section>
+            <p class="text-auto-size">@Html.Raw(Model.Description)</p>
+        </section>*@
+    @*@if (Model.ShowLeftFooter)
+        {
+            <footer>
+                <p>
+                    @Html.Raw(Model.LeftFooter)
+                </p>
+            </footer>
+        }
+
+        @if (Model.ShowRightFooter)
+        {
+            <footer>
+                <time>
+                    @Html.Raw(Model.RightFooter)
+                </time>
+            </footer>
+        }*@
+</article>

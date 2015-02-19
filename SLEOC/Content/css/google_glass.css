@@ -377,6 +377,13 @@ sub {
   line-height: 1.18em;
 }
 
+.text-xx-small {
+  font-weight: 100;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 1.10em;
+}
+
 /* Footer-style text. */
 .text-minor {
   font-weight: 300;

@@ -239,6 +239,7 @@
     <Compile Include="Models\DecryptInputModel.cs" />
     <Compile Include="Models\EncryptInputModel.cs" />
     <Compile Include="Models\InterfaceModel.cs" />
+    <Compile Include="Models\DDStatsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SLEOCEntityModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -472,6 +473,8 @@
     <Content Include="Views\Card\Video.cshtml" />
     <Content Include="Views\EncryptedCard\Video.cshtml" />
     <Content Include="Views\Card\Map.cshtml" />
+    <Content Include="Views\Card\DisasterDeclarationsStats.cshtml" />
+    <Content Include="Views\EncryptedCard\DisasterDeclarationsStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

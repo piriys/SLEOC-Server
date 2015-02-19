@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Helpers;
 using SLEOC.Models;
 using SLEOC.Helpers;
+using System.Net;
 
 namespace SLEOC.Controllers
 {
@@ -13,6 +14,17 @@ namespace SLEOC.Controllers
     {
         public ActionResult Start()
         {
+            string userAgent = Request.UserAgent;
+
+            ViewBag.UserAgentColor = "red";
+            if(userAgent.Contains("SecondLife"))
+            {
+                ViewBag.UserAgentColor = "green";
+                userAgent = userAgent.Substring(userAgent.IndexOf("SecondLife"));
+            }
+
+            ViewBag.UserAgent = userAgent;
+
             return PartialView();
         }
 
@@ -25,6 +37,11 @@ namespace SLEOC.Controllers
         {
             ViewBag.MapID = System.Guid.NewGuid().ToString();
             return View();
+        }
+
+        public ActionResult DisasterDeclarationsStats(DDStatsModel model)
+        {
+            return PartialView(model);
         }
 
         public ActionResult Video(CardVideoModel model)

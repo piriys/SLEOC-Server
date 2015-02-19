@@ -188,3 +188,7 @@ img.footer-brand-icon {
 footer#map-time-footer.has-brand-icon img.footer-brand-icon {
     display: block;
 }
+
+.capitalize {
+    text-transform:capitalize;
+}
