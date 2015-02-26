@@ -10,9 +10,9 @@
 <link href="@Url.Content("~/Content/css/google_glass_ui.css")" rel="stylesheet" />
 
 <article data-type="text" data-encrypted="@ViewBag.Encrypted">
-    <div class="topbutton send"></div>
-    <div class="topbutton team"></div>
-    <div class="topbutton close"></div>
+    <div title="Send to Team" class="topbutton send"></div>
+    <div title="Join/Switch Team" class="topbutton team"></div>
+    <div title="Delete Card" class="topbutton close"></div>
     <section>
         <div class="text-auto-size">
             <p>@Html.Raw(Model.Title)</p>

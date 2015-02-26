@@ -10,9 +10,9 @@
 <link href="@Url.Content("~/Content/css/google_glass_ui.css")" rel="stylesheet" />
 
 <article data-type="mosaictext" data-encrypted="@ViewBag.Encrypt">
-    <div class="topbutton send"></div>
-    <div class="topbutton team"></div>
-    <div class="topbutton close"></div>
+    <div title="Send to Team" class="topbutton send"></div>
+    <div title="Join/Switch Team" class="topbutton team"></div>
+    <div title="Delete Card" class="topbutton close"></div>
     <figure>
         <ul class="mosaic mosaic@(SLEOC.Helpers.MathHelpers.Clamp(Model.ImageURL.Count, 1, 8))">
             @for (int i = 0; i < Math.Min(Model.ImageURL.Count, 8); i++)

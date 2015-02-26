@@ -1,9 +1,7 @@
 ﻿@{
     ViewBag.Title = "Start";
 }
-<script>
-    jQuery("#card").load("http://nuclearsecrecy.com/nukemap/?&kt=20&lat=47.6063889&lng=-122.3308333&airburst=0&hob_ft=0&fallout=1&zm=14");
-</script>
+
 <div id="card" class="card">
     @Html.Action("List", "Card")
     @Html.Action("Text", "Card")

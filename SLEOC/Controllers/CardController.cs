@@ -12,21 +12,6 @@ namespace SLEOC.Controllers
 {
     public class CardController : Controller
     {
-        public ActionResult Start()
-        {
-            string userAgent = Request.UserAgent;
-
-            ViewBag.UserAgentColor = "red";
-            if(userAgent.Contains("SecondLife"))
-            {
-                ViewBag.UserAgentColor = "green";
-                userAgent = userAgent.Substring(userAgent.IndexOf("SecondLife"));
-            }
-
-            ViewBag.UserAgent = userAgent;
-
-            return PartialView();
-        }
 
         public ActionResult Team()
         {
@@ -41,6 +26,8 @@ namespace SLEOC.Controllers
 
         public ActionResult DisasterDeclarationsStats(DDStatsModel model)
         {
+            ViewBag.FullState = StateHelpers.StateAbbreviationExpand(model.State);
+
             return PartialView(model);
         }
 

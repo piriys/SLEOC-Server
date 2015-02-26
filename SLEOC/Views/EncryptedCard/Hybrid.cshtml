@@ -10,9 +10,9 @@
 <link href="@Url.Content("~/Content/css/google_glass_ui.css")" rel="stylesheet" />
 
 <article class="photo" data-type="hybrid" data-encrypted="@ViewBag.Encrypted">
-    <div class="topbutton send"></div>
-    <div class="topbutton team"></div>
-    <div class="topbutton close"></div>
+    <div title="Send to Team" class="topbutton send"></div>
+    <div title="Join/Switch Team" class="topbutton team"></div>
+    <div title="Delete Card" class="topbutton close"></div>
     <img src="@Model.ImageURL" width="100%" height="100%">
     <div class="overlay-gradient-tall-dark" />
     <section>

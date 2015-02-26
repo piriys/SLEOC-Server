@@ -20,7 +20,6 @@
                 var ddList = data1.DisasterDeclarationsSummaries;
                 if(ddList.length > 0)
                 {
-                    jQuery("." + "@Model.State" + "-total-disaster-declarations").html(ddList.length);
                     jQuery("." + "@Model.State" + "-latest-disater-declaration").html(ddList[0].declarationDate.substring(0, 10));
                     jQuery("." + "@Model.State" + "-latest-incident").html("<span class='red'>" + ddList[0].title + "</span>");
 
@@ -61,14 +60,6 @@
                     </tr>
                     <tr>
                         <td>
-                            Total Disaster Declarations
-                        </td>
-                        <td class="@Model.State-total-disaster-declarations">
-                            N/A
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             Total <span class="@Model.State-recent-incident capitalize"></span>Incidents
                         </td>
                         <td class="@Model.State-recent-incident-declarations">
@@ -80,7 +71,7 @@
     </section>
     <footer>
         <p>
-            State: @Model.State
+            State: @ViewBag.FullState
         </p>
     </footer>
         <footer>
