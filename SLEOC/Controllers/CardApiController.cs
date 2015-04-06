@@ -12,6 +12,22 @@ namespace SLEOC.Controllers
     public class CardApiController : ApiController
     {
         [HttpPost]
+        public HttpResponseMessage AddSLCard(string key = "public", string encrypted = "")
+        {
+            try
+            {
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<CardHub>();
+                hubContext.Clients.Group(key).addSLCard(encrypted);
+                hubContext.Clients.Group(key).log("Adding card from SL object");
+                return Request.CreateResponse(HttpStatusCode.Accepted);            
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);   
+            }
+        }
+
+        [HttpPost]
         public HttpResponseMessage AddCard(string type = "text", string key = "public", string encrypted = "")
         {
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<CardHub>();

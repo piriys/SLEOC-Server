@@ -145,6 +145,7 @@
             goToCard(2);
         });
 
+        /*Remove this soon*/
         jQuery("article .send").click(function () {
             var encrypted = jQuery(this).parent().data("encrypted");
             var type = jQuery(this).parent().data("type");
@@ -208,6 +209,33 @@
         });
     }
 
+    function addSLCard(encryptedParameter)
+    {
+        var cardArea = jQuery('#card');
+        var ajaxUrl = '@Url.Action("Load", "SLCard")';
+        console.log("Requesting card html from " + ajaxUrl);
+        jQuery.ajax({
+            type: 'GET',
+            url: ajaxUrl,
+            cache: false,
+            data: {
+                encrypted: encryptedParameter
+            },
+            success: function (response) {
+                jQuery(cardArea).append(response);
+                Card.init();
+                goToLatestCard();
+                attachCardToEvent();
+            }
+        });
+    }
+
+    function shareSLCard(encryptedParameter)
+    {
+        console.log("Sharing card with encrypted parameter: " + encryptedParameter);
+        cardHubClient.server.shareSLCard(encrypted, currentTeamName);
+    }
+
     function joinTeam(team) {
         if (enableJoinTeam) {
             currentTeam = team;
@@ -267,6 +295,10 @@
             addCard(cardType, encryptedParameter);
         }
 
+        cardHubClient.client.addSLCard = function (encryptedParameter) {
+            addSLCard(encryptedParameter);
+        }
+
         cardHubClient.client.setScriptUrl = function (url, regionName)
         {
             scriptUrl = url;
@@ -317,7 +349,8 @@
         <header>
             <img src="@Model.AvatarImageUrl">
             <h1>Connected Avatar: <span id="avatar-name" class="yellow">@Model.AvatarName</span></h1>
-            <h2>Region: 
+            <h2>
+                Region:
                 @if (Model.ConnectedFromSL)
                 {
                     <span id="current-region">@Model.StartingRegion</span>
@@ -329,7 +362,11 @@
             </h2>
         </header>
         <section>
-            <p class="text-auto-size">Welcome to SLEOCi! Navigate through cards by clicking on left or right arrow on the edges. Interact with objects in Second life to load cards into this HUD.</p>
+            <ul class="text-xx-small">
+                <li class="menubutton">Manual</li>
+                <li class="menubutton">Team</li>
+                <li class="menubutton">Latest Card</li>
+            </ul>
         </section>
     </article>
 </div>

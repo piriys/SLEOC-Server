@@ -67,9 +67,13 @@
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.2.0.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -77,6 +81,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -85,6 +93,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -95,30 +111,17 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -218,12 +221,14 @@
     <Compile Include="Controllers\EncryptedCardController.cs" />
     <Compile Include="Controllers\HelperApiController.cs" />
     <Compile Include="Controllers\HelperController.cs" />
+    <Compile Include="Controllers\SLCardController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BLSHelpers.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\GeoJsonHelpers.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Helpers\OpenFEMAHelpers.cs" />
     <Compile Include="Helpers\SLHelpers.cs" />
@@ -243,6 +248,7 @@
     <Compile Include="Models\CardVideoModel.cs" />
     <Compile Include="Models\DecryptInputModel.cs" />
     <Compile Include="Models\EncryptInputModel.cs" />
+    <Compile Include="Models\GeoJson\Earthquake.cs" />
     <Compile Include="Models\InterfaceModel.cs" />
     <Compile Include="Models\DDStatsModel.cs" />
     <Compile Include="Models\OpenFEMA\DisasterDeclaration.cs" />
@@ -396,7 +402,7 @@
     <None Include="Properties\PublishProfiles\crimsondash.com - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\crimsondash.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\File System.pubxml" />
-    <None Include="Properties\PublishProfiles\PiriyaDomain.com - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\sleoci.boozallen.me - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\google_glass.js" />
     <Content Include="Scripts\heatmap.js" />
@@ -415,10 +421,31 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.0.debug.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\knockout-2.3.0.debug.js" />
+    <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\google_glass_ui.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\spa\changeTracker.js" />
+    <Content Include="Scripts\spa\commands.js" />
+    <Content Include="Scripts\spa\knockout.js" />
+    <Content Include="Scripts\spa\main.js" />
+    <Content Include="Scripts\spa\math\base.js" />
+    <Content Include="Scripts\spa\math\math.js" />
+    <Content Include="Scripts\spa\math\matrix.js" />
+    <Content Include="Scripts\spa\math\matrix3.js" />
+    <Content Include="Scripts\spa\math\matrix4.js" />
+    <Content Include="Scripts\spa\math\vector2.js" />
+    <Content Include="Scripts\spa\math\vector3.js" />
+    <Content Include="Scripts\spa\messenger.js" />
+    <Content Include="Scripts\spa\moment.js" />
+    <Content Include="Scripts\spa\observable.js" />
+    <Content Include="Scripts\spa\operation.js" />
+    <Content Include="Scripts\spa\store.js" />
+    <Content Include="Scripts\spa\timers.js" />
+    <Content Include="Scripts\spa\underscore.js" />
+    <Content Include="Scripts\spa\utils.js" />
     <Content Include="Scripts\svg_converter.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -487,6 +514,16 @@
     <Content Include="Views\Debug\OpenFEMATest.cshtml" />
     <Content Include="Views\Debug\BLSTest.cshtml" />
     <Content Include="Views\Debug\SLScriptRequestTest.cshtml" />
+    <Content Include="Views\SLCard\Comments.cshtml" />
+    <Content Include="Views\SLCard\Error.cshtml" />
+    <Content Include="Views\SLCard\Author.cshtml" />
+    <Content Include="Views\SLCard\Hybrid.cshtml" />
+    <Content Include="Views\SLCard\HybridMosaic.cshtml" />
+    <Content Include="Views\SLCard\List.cshtml" />
+    <Content Include="Views\SLCard\MosaicList.cshtml" />
+    <Content Include="Views\SLCard\MosaicText.cshtml" />
+    <Content Include="Views\SLCard\Text.cshtml" />
+    <Content Include="Views\SLCard\Video.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

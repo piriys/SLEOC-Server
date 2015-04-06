@@ -107,6 +107,26 @@ body.small {
     background-image: url('../images/close.svg');
 }
 
+.slcard .send
+{
+    right: 160px;
+}
+
+.slcard .team
+{
+    right: 120px;
+}
+
+.slcard .comments 
+{
+    right: 80px;
+}
+
+.slcard .close
+{
+    right: 40px;
+}
+
 .topbutton:hover
 {
     opacity: 0.7;
@@ -129,7 +149,7 @@ body.small {
     z-index: 100;
 }
 
-.teambutton {
+.teambutton, .menubutton {
     cursor: pointer;
     opacity: 1.0;
     transition: opacity 0.4s ease-in-out;
@@ -140,7 +160,7 @@ body.small {
     z-index: 100;
 }
 
-.teambutton:hover {
+.teambutton:hover, .menubutton:hover {
     opacity: 0.5;
 }
 

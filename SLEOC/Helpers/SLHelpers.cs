@@ -36,12 +36,13 @@ namespace SLEOC.Helpers
                 info.Owner = response.GetResponseHeader("X-SecondLife-Owner-Name");
                 info.Region = response.GetResponseHeader("X-SecondLife-Region");
                 info.Server = response.GetResponseHeader("Server");
-                return info;
             }
             catch
             {
-                return null;
+
             }
+
+            return info;
         }
     }
 }

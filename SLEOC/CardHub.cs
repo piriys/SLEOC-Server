@@ -37,6 +37,28 @@ namespace SLEOC
             Groups.Add(Context.ConnectionId, key);
         }
 
+        [HubMethodName("shareCard")]
+        public void ShareCard(string encrypted, string team)
+        {
+            var connections = _teamConnections.Where(x => x.Value == team).Select(x => x.Key).ToList();
+
+            foreach (string connection in connections)
+            {
+                if (connection != Context.ConnectionId)
+                {
+                    Clients.Client(connection).addSLCard(encrypted);
+                    Clients.Client(connection).log("Card recieved from " + Context.ConnectionId);
+                    Clients.Caller.log("Sending card to " + connection);
+                }
+                else
+                {
+                    Clients.Caller.log("Skipping " + connection);
+                }
+            }
+
+            Clients.Caller.log("Card sent");
+        }
+
         [HubMethodName("sendCard")]
         public void SendCard(string type, string encrypted, string team)
         {

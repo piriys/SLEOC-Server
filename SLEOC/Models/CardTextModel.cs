@@ -12,7 +12,7 @@ namespace SLEOC.Models
 
         public CardTextModel()
         {
-            Title = "&lt;span class=&quot;muted&quot;&gt;Title&lt;/span&gt;";
+            Title = "Title";
             Description = "Description";
         }
     }

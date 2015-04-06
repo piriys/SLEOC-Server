@@ -13,7 +13,7 @@ namespace SLEOC.Models
 
         public CardMosaicTextModel()
         {
-            Title = "&lt;span class=&quot;muted&quot;&gt;Title&lt;/span&gt;";
+            Title = "Title";
             Description = "Description";
             ImageURL = new List<string>();
         }
